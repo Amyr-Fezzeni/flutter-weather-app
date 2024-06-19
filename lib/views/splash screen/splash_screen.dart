@@ -13,7 +13,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    context.appthemeRead.initTheme();
+    context.appThemeRead.initTheme();
     super.initState();
   }
 

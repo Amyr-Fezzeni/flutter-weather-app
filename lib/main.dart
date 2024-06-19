@@ -8,6 +8,7 @@ import 'package:weather_app/providers/theme_provider.dart';
 import 'package:weather_app/services/ext.dart';
 import 'package:weather_app/services/navigation_service.dart';
 import 'package:weather_app/services/shared_data.dart';
+import 'package:weather_app/views/home/home.dart';
 import 'package:weather_app/views/splash%20screen/splash_screen.dart';
 
 void main() async {
@@ -40,12 +41,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: NavigationService.navigatorKey,
       theme: ThemeData(
+          appBarTheme: AppBarTheme(backgroundColor: context.bgcolor),
+          iconTheme: IconThemeData(color: context.iconColor),
           colorScheme: ColorScheme.fromSeed(
               secondary: context.primaryColor,
               seedColor: context.primaryColor,
               background: context.bgcolor),
           useMaterial3: true),
-      home: const SplashScreen(),
+      home: const Home(),
     );
   }
 }

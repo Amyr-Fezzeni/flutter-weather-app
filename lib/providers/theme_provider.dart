@@ -83,7 +83,7 @@ class AppThemeProvider with ChangeNotifier {
     }
   }
 
-  setLightTheme() {
+  setDarkTheme() {
     bgColor = darkBgColor;
     text = textstyle.copyWith(color: Colors.white70);
     title = titlestyle.copyWith(color: Colors.white70);
@@ -91,7 +91,7 @@ class AppThemeProvider with ChangeNotifier {
     primaryColor = primaryColorDark;
   }
 
-  setDarkTheme() {
+  setLightTheme() {
     bgColor = lightBgColor;
     text = textstyle.copyWith(color: Colors.black87);
     title = titlestyle.copyWith(color: Colors.black87);
