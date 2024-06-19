@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 // App text Style
 TextStyle textstyle = GoogleFonts.nunito(color: Colors.black87, fontSize: 14);
 
 TextStyle titlestyle = GoogleFonts.poppins(
     color: Colors.white, fontSize: 35, fontWeight: FontWeight.w800);
 
-
-
 // App colors
 const lightBgColor = Color.fromARGB(255, 255, 255, 255);
 const darkBgColor = Color.fromARGB(255, 23, 23, 23);
 
-const primaryColor = Color.fromARGB(212, 223, 0, 0);
+const primaryColorLight = Color(0xff90B2F9);
+const primaryColorDark = Color(0xff90B2F8);
 
 const primaryGradient = [
   Color.fromARGB(255, 82, 113, 255),
@@ -38,4 +36,3 @@ const double smallRadius = 8;
 const double bigRadius = 20;
 final defaultSmallRadius = BorderRadius.circular(smallRadius);
 final defaultBigRadius = BorderRadius.circular(bigRadius);
-
