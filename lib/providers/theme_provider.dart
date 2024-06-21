@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/constants/app_style.dart';
 import 'package:weather_app/models/theme.dart';
 import 'package:weather_app/services/navigation_service.dart';
-import 'package:weather_app/services/shared_data.dart';
+import 'package:weather_app/services/local_data.dart';
 
 class AppThemeProvider with ChangeNotifier {
   AppThemeModel appTheme = AppThemeModel.system;
@@ -33,11 +33,11 @@ class AppThemeProvider with ChangeNotifier {
     }
     appTheme = value;
     notifyListeners();
-    DataPrefrences.setDarkMode(value);
+    LocalData.saveAppTheme(value);
   }
 
-  initTheme() {
-    appTheme = getAppThemeFromString(DataPrefrences.getDarkMode());
+  initTheme() async {
+    appTheme = LocalData.getAppTheme();
     isDark = appTheme == AppThemeModel.system
         ? getSystemTheme()
         : appTheme == AppThemeModel.dark;
@@ -46,13 +46,14 @@ class AppThemeProvider with ChangeNotifier {
     } else {
       setLightTheme();
     }
-
+    Future.delayed(const Duration(milliseconds: 10))
+        .then((value) => notifyListeners());
     startThemeListen();
   }
 
   startThemeListen() {
     if (appTheme != AppThemeModel.system) return;
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 4), (timer) {
       if (appTheme != AppThemeModel.system) timer.cancel();
 
       if (systemThemeChanged()) {

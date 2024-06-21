@@ -41,7 +41,8 @@ class _SettingsState extends State<Settings> {
                   onTap: (UnitModel unit) =>
                       context.dataRead.changeatmospherePressureUnit(unit),
                   lst: atmospherePressureList),
-              darkModePopup()
+              darkModePopup(),
+              languagePopup()
             ],
           ),
         ),

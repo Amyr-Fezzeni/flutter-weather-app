@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/services/ext.dart';
 import 'navigation_service.dart';
 
-enum LanguageModel { french, english }
+// enum LanguageModel { french, english }
 
 String txt(String key) {
   // log(DataPrefrences.getAccountType());

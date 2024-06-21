@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/constants/app_style.dart';
 import 'package:weather_app/models/city.dart';
@@ -16,7 +15,7 @@ class AddCity extends StatefulWidget {
 class _AddCityState extends State<AddCity> {
   TextEditingController controller = TextEditingController();
   FocusNode focus = FocusNode();
-  List<City> locationsData = [];
+  List<CityInfo> locationsData = [];
   bool firstSearch = false;
 
   @override
@@ -109,21 +108,27 @@ class _AddCityState extends State<AddCity> {
                                 ),
                                 Txt('No results.')
                               ],
-                              ...locationsData.map((e) => ListTile(
-                                    onTap: () => context.dataRead.addCity(e),
-                                    title: Txt(e.name,
-                                        translate: false, bold: true),
-                                    subtitle: Txt(
-                                        [e.country, e.state].join(', '),
-                                        translate: false),
-                                    trailing: context.dataWatch.cityList
+                              ...locationsData
+                                  .map((e) => Builder(builder: (context) {
+                                        bool added = context.dataWatch.cityList
                                             .where((city) =>
-                                                "${city.latitude}, ${city.longitude}" ==
-                                                "${e.latitude}, ${e.longitude}")
-                                            .isNotEmpty
-                                        ? Txt("Added", bold: true)
-                                        : const Icon(Icons.add),
-                                  ))
+                                                "${city.city.coord.lat}${city.city.coord.lon}" ==
+                                                "${e.lat}${e.lon}")
+                                            .isNotEmpty;
+                                        return ListTile(
+                                          onTap: () => added
+                                              ? null
+                                              : context.dataRead.addCity(e),
+                                          title: Txt(e.name ?? '',
+                                              translate: false, bold: true),
+                                          subtitle: Txt(
+                                              [e.country, e.state].join(', '),
+                                              translate: false),
+                                          trailing: added
+                                              ? Txt("Added", bold: true)
+                                              : const Icon(Icons.add),
+                                        );
+                                      }))
                             ],
                           ),
                         ),

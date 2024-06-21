@@ -5,6 +5,7 @@ import 'package:weather_app/services/ext.dart';
 import 'package:weather_app/services/language.dart';
 import 'package:weather_app/views/city/add_city.dart';
 import 'package:weather_app/widgets/appbar.dart';
+import 'package:weather_app/widgets/weather/city_card.dart';
 
 class ManageCities extends StatefulWidget {
   const ManageCities({super.key});
@@ -44,9 +45,7 @@ class _ManageCitiesState extends State<ManageCities> {
                 ),
               ),
               const Gap(20),
-              ...context.dataWatch.cityList.map((e) => Container(
-                    child: Txt(e.name),
-                  ))
+              ...context.dataWatch.cityList.map((e) => CityCard(city: e))
             ],
           ),
         ),

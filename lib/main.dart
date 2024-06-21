@@ -7,9 +7,8 @@ import 'package:weather_app/providers/data_provider.dart';
 import 'package:weather_app/providers/theme_provider.dart';
 import 'package:weather_app/services/ext.dart';
 import 'package:weather_app/services/navigation_service.dart';
-import 'package:weather_app/services/shared_data.dart';
+import 'package:weather_app/services/local_data.dart';
 import 'package:weather_app/views/home/home.dart';
-import 'package:weather_app/views/splash%20screen/splash_screen.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +17,10 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   await dotenv.load(fileName: ".env");
-  await DataPrefrences.init();
+  await LocalData.init();
+
   FlutterNativeSplash.remove();
 
   runApp(MultiProvider(

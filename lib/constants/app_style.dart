@@ -16,7 +16,7 @@ const primaryColorDark = Color(0xff90B2F8);
 
 const primaryGradient = [
   Color.fromARGB(255, 82, 113, 255),
-  Color.fromARGB(255, 91, 121, 251)
+  Color.fromARGB(255, 99, 161, 241)
 ];
 
 const palette = [
@@ -31,8 +31,47 @@ const palette = [
   Color.fromRGBO(238, 238, 238, 1)
 ];
 
+LinearGradient getGradient(String condition) {
+  switch (condition) {
+    case 'Clear':
+      return const LinearGradient(
+        colors: [Colors.blue, Colors.lightBlueAccent],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+    case 'Clouds':
+      return const LinearGradient(
+        colors: [Colors.grey, Colors.blueGrey],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+    case 'Rain':
+      return const LinearGradient(
+        colors: [Colors.blueGrey, Colors.black],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+    case 'Snow':
+      return const LinearGradient(
+        colors: [Colors.white, Colors.lightBlueAccent],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+    default:
+      return const LinearGradient(
+        colors: [Colors.blue, Colors.lightBlueAccent],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+  }
+}
+
 // Extra settings
 const double smallRadius = 8;
 const double bigRadius = 20;
 final defaultSmallRadius = BorderRadius.circular(smallRadius);
 final defaultBigRadius = BorderRadius.circular(bigRadius);
+
+const defaultBoxShadow = [
+  BoxShadow(blurRadius: 7, offset: Offset(2, 2), color: Colors.black54)
+];
