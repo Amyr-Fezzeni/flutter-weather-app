@@ -1,17 +1,18 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
-import 'package:weather_app/services/ext.dart';
+import 'package:weather_app/services/context_extention.dart';
 import 'navigation_service.dart';
 
 // enum LanguageModel { french, english }
 
 String txt(String key) {
   // log(DataPrefrences.getAccountType());
-  return key;
+  // return key;
   // LanguageModel language = NavigationService.navigatorKey.currentContext!
   //     .dataRead
-  //     .;
-  // // addKey(key);
+  //     .currentLanguage;
+  // addKey(key);
+  return key;
   // return language == LanguageModel.english
   //     ? english[key] ?? key
   //     : frensh[key] ?? key;
@@ -50,4 +51,3 @@ Widget Txt(String text,
   );
 }
 
-// Map<String, dynamic> data = {};

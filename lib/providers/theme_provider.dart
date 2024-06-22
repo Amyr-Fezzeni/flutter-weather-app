@@ -32,8 +32,10 @@ class AppThemeProvider with ChangeNotifier {
       setLightTheme();
     }
     appTheme = value;
+
     notifyListeners();
     LocalData.saveAppTheme(value);
+    startThemeListen();
   }
 
   initTheme() async {
@@ -53,8 +55,11 @@ class AppThemeProvider with ChangeNotifier {
 
   startThemeListen() {
     if (appTheme != AppThemeModel.system) return;
-    Timer.periodic(const Duration(seconds: 4), (timer) {
-      if (appTheme != AppThemeModel.system) timer.cancel();
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (appTheme != AppThemeModel.system) {
+        timer.cancel();
+        return;
+      }
 
       if (systemThemeChanged()) {
         isDark = !isDark;

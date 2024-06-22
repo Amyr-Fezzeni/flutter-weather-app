@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/models/theme.dart';
-import 'package:weather_app/services/ext.dart';
+import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/language.dart';
 
 AppBar appBar(String title,
@@ -12,9 +12,7 @@ AppBar appBar(String title,
     shadowColor: Colors.black45,
     elevation: 0,
     title: Builder(builder: (context) {
-      return Txt(title,
-          style:
-              context.text.copyWith(fontWeight: FontWeight.bold, fontSize: 16));
+      return Txt(title, style: context.title);
     }),
     centerTitle: true,
     leading: SizedBox(
@@ -23,8 +21,7 @@ AppBar appBar(String title,
                 return InkWell(
                     onTap: () => Navigator.pop(context),
                     child: Icon(Icons.arrow_back_ios_new_rounded,
-                        size: 25,
-                        color: context.iconColor));
+                        size: 25, color: context.iconColor));
               })
             : null),
     actions: [

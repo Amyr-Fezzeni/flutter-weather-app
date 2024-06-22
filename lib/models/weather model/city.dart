@@ -8,8 +8,8 @@ class City {
   final String country;
   final int population;
   final int timezone;
-  final int sunrise;
-  final int sunset;
+  final DateTime sunrise;
+  final DateTime sunset;
 
   City({
     required this.id,
@@ -30,8 +30,10 @@ class City {
       country: json['country'],
       population: json['population'],
       timezone: json['timezone'],
-      sunrise: json['sunrise'],
-      sunset: json['sunset'],
+      sunrise:
+          DateTime.fromMillisecondsSinceEpoch((json['sunrise'] * 1000).toInt()),
+      sunset:
+          DateTime.fromMillisecondsSinceEpoch((json['sunset'] * 1000).toInt()),
     );
   }
 
@@ -43,8 +45,8 @@ class City {
       'country': country,
       'population': population,
       'timezone': timezone,
-      'sunrise': sunrise,
-      'sunset': sunset,
+      'sunrise': sunrise.millisecondsSinceEpoch ~/ 1000,
+      'sunset': sunset.millisecondsSinceEpoch ~/ 1000,
     };
   }
 

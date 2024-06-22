@@ -40,6 +40,6 @@ class WeatherModel {
 
   @override
   String toString() {
-    return 'WeatherModel(cod: $cod, message: $message, cnt: $cnt, city: $city, )'; //list: $list,
+    return 'WeatherModel(cod: $cod, message: $message, cnt: $cnt, city: $city, list: ${list.length})'; //list: $list,
   }
 }

@@ -14,6 +14,7 @@ class DataProvider with ChangeNotifier {
   LanguageModel currentLanguage = LanguageModel.french;
   late final Box box;
   List<WeatherModel> cityList = [];
+  WeatherModel? mainCity;
   int currentCityIndex = 0;
 
   UnitModel temperatureUnit = temperatureList.first;
@@ -23,6 +24,32 @@ class DataProvider with ChangeNotifier {
   changeDefaultLanguage(LanguageModel language) {
     currentLanguage = language;
     LocalData.saveAppLanguage(language);
+    notifyListeners();
+  }
+
+  List<WeatherModel> getCityList() {
+    List<WeatherModel> allData = [];
+    if (mainCity != null) {
+      allData.add(mainCity!);
+    }
+    allData.addAll(cityList);
+    return allData;
+  }
+
+  updateCurrentCityIndex(bool toRight) {
+    final allData = getCityList();
+    if (allData.length < 2) return;
+    if (toRight) {
+      currentCityIndex += 1;
+      if (allData.length >= currentCityIndex) {
+        currentCityIndex = 0;
+      }
+    } else {
+      currentCityIndex -= 1;
+      if (currentCityIndex < 0) {
+        currentCityIndex = allData.length - 1;
+      }
+    }
     notifyListeners();
   }
 
@@ -74,11 +101,50 @@ class DataProvider with ChangeNotifier {
 
   Future<void> initData() async {
     currentLanguage = LocalData.getAppLanguage();
+    mainCity = LocalData.getMainWeather();
     cityList = LocalData.getSavedWeather();
+
+    await getCurrentLocation();
+    updateWeatherData();
+  }
+
+  updateWeatherData() async {
+    if (mainCity != null) {
+      final cityData = await ApiService.getForecastWeatherDataByCordinate(
+          lat: mainCity!.city.coord.lat,
+          lon: mainCity!.city.coord.lon,
+          lang: currentLanguage.name.substring(0, 2));
+      if (cityData != null) {
+        mainCity = cityData;
+        LocalData.saveWeatherData(cityData, isMain: true);
+        notifyListeners();
+      }
+    }
+    List<WeatherModel> newCitiesData = [];
+    for (var city in cityList) {
+      final cityData = await ApiService.getForecastWeatherDataByCordinate(
+          lat: city.city.coord.lat,
+          lon: city.city.coord.lon,
+          lang: currentLanguage.name.substring(0, 2));
+      if (cityData == null) continue;
+      newCitiesData.add(cityData);
+    }
+    cityList = newCitiesData;
+    notifyListeners();
   }
 
   Future<void> getCurrentLocation() async {
     final data = await LocationService.requestLocation();
-    log("Location: $data");
+    log(data.toString());
+    if (data == null) return;
+    WeatherModel? cityData = await ApiService.getForecastWeatherDataByCordinate(
+        lat: data.latitude,
+        lon: data.longitude,
+        lang: currentLanguage.name.substring(0, 2));
+    if (cityData == null) return;
+
+    LocalData.saveWeatherData(cityData, isMain: true);
+    mainCity = cityData;
+    notifyListeners();
   }
 }

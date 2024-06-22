@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // App text Style
-TextStyle textstyle = GoogleFonts.nunito(color: Colors.black87, fontSize: 14);
+TextStyle textstyle =
+    GoogleFonts.nunito(color: Colors.black87, fontSize: 16.sp);
 
-TextStyle titlestyle = GoogleFonts.poppins(
-    color: Colors.white, fontSize: 35, fontWeight: FontWeight.w800);
+TextStyle titlestyle = GoogleFonts.nunito(
+    color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold);
 
 // App colors
 const lightBgColor = Color.fromARGB(255, 255, 255, 255);

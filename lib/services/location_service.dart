@@ -10,6 +10,7 @@ class LocationService {
         return null;
       }
       final Position location = await Geolocator.getCurrentPosition();
+      log(location.toString());
       return location;
     } on Exception catch (e) {
       log(e.toString());

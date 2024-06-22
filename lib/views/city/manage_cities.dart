@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/constants/app_style.dart';
-import 'package:weather_app/services/ext.dart';
+import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/language.dart';
 import 'package:weather_app/views/city/add_city.dart';
 import 'package:weather_app/widgets/appbar.dart';
@@ -45,7 +45,9 @@ class _ManageCitiesState extends State<ManageCities> {
                 ),
               ),
               const Gap(20),
-              ...context.dataWatch.cityList.map((e) => CityCard(city: e))
+              if (context.dataWatch.mainCity != null)
+                CityCard(weatherData: context.dataWatch.mainCity!),
+              ...context.dataWatch.cityList.map((e) => CityCard(weatherData: e))
             ],
           ),
         ),

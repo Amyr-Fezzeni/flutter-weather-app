@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:weather_app/services/ext.dart';
+import 'package:weather_app/models/weather%20model/weather_model.dart';
+import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/language.dart';
 import 'package:weather_app/views/city/manage_cities.dart';
-import 'package:weather_app/views/home/weather_details.dart';
+import 'package:weather_app/views/weather/weather_details.dart';
 import 'package:weather_app/views/settings/settings.dart';
 
 class Home extends StatefulWidget {
@@ -12,12 +15,24 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(vsync: this, duration: const Duration(seconds: 1))
+        ..forward();
+  late final Animation<double> _animation =
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+
   @override
   void initState() {
     context.appThemeRead.initTheme();
     context.dataRead.initData();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,8 +57,44 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: WeatherDetails(
-        weatherData: context.dataWatch.cityList[0],
+      body: SizedBox(
+        height: context.h,
+        width: context.w,
+        child: Builder(
+          builder: (context) => context.dataWatch.cityList.isNotEmpty ||
+                  context.dataWatch.mainCity != null
+              ? GestureDetector(
+                  onHorizontalDragEnd: (DragEndDetails details) {
+                    if (details.primaryVelocity! > 0) {
+                      context.dataRead.updateCurrentCityIndex(true);
+                      _controller.reset();
+                      _controller.forward();
+                    } else if (details.primaryVelocity! < 0) {
+                      context.dataRead.updateCurrentCityIndex(false);
+                      _controller.reset();
+                      _controller.forward();
+                    } else {
+                      log(details.primaryVelocity.toString());
+                    }
+                  },
+                  child: FadeTransition(
+                    opacity: _animation,
+                    child: Builder(builder: (context) {
+                      List<WeatherModel> cityList =
+                          context.dataRead.getCityList();
+                      return WeatherDetails(
+                          weatherData:
+                              cityList[context.dataWatch.currentCityIndex]);
+                    }),
+                  ),
+                )
+              : Center(
+                  child: ElevatedButton(
+                  onPressed: () => context.moveTo(const ManageCities()),
+                  child:
+                      Txt('Add city', color: context.primaryColor, bold: true),
+                )),
+        ),
       ),
     );
   }

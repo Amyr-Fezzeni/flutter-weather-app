@@ -31,6 +31,9 @@ dependencies:
   build_runner: ^2.4.9
   hive: ^2.2.3
   path_provider: ^2.1.3
+  timezone: ^0.9.3
+  fl_chart: ^0.68.0
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
@@ -47,10 +50,11 @@ flutter:
     - assets/
     - assets/logo/
     - assets/icons/
+    - assets/background/
 
 
 flutter_icons:
-  image_path: "assets/logo/logo.jpg"
+  image_path: "assets/logo/transparent logo.png"
   adaptive_icon_background: "#ffffff"
   android: true
   ios: true

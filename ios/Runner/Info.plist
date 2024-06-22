@@ -50,6 +50,6 @@
 		<key>UIStatusBarHidden</key>
 		<false/>
 		<key>FLTEnableImpeller</key>
-		<false />
+		<false/>
 	</dict>
 </plist>

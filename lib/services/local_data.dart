@@ -17,12 +17,23 @@ class LocalData {
     return List<WeatherModel>.from(_box.get('cities', defaultValue: []).map(
         (data) => WeatherModel.fromJson(Map<String, dynamic>.from(data))));
   }
+  static WeatherModel? getMainWeather() {
+    final mainCity = _box.get('mainCity');
+    if (mainCity != null) {
+      return WeatherModel.fromJson(Map<String, dynamic>.from(mainCity));
+    }
+    return null;
+  }
 
-  static saveWeatherData(WeatherModel data) {
-    List<dynamic> cities = _box.get('cities', defaultValue: []);
-    cities.removeWhere((c) => c['city']['id'] == data.city.id);
-    cities.add(data.toJson());
-    _box.put('cities', cities);
+  static saveWeatherData(WeatherModel data, {bool isMain = false}) {
+    if (isMain) {
+      _box.put('mainCity', data.toJson());
+    } else {
+      List<dynamic> cities = _box.get('cities', defaultValue: []);
+      cities.removeWhere((c) => c['city']['id'] == data.city.id);
+      cities.add(data.toJson());
+      _box.put('cities', cities);
+    }
   }
 
   static removeWeatherData(WeatherModel data) {

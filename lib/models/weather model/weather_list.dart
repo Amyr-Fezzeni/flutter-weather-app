@@ -6,7 +6,7 @@ import 'weather.dart';
 import 'wind.dart';
 
 class WeatherList {
-  final int dt;
+  final DateTime dt;
   final MainWeather main;
   final List<Weather> weather;
   final Clouds clouds;
@@ -30,7 +30,7 @@ class WeatherList {
 
   factory WeatherList.fromJson(Map<String, dynamic> json) {
     return WeatherList(
-      dt: json['dt'],
+      dt: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
       main: MainWeather.fromJson(Map<String, dynamic>.from(json['main'])),
       weather: List<Weather>.from(json['weather']
           .map((x) => Weather.fromJson(Map<String, dynamic>.from(x)))),
@@ -45,7 +45,7 @@ class WeatherList {
 
   Map<String, dynamic> toJson() {
     return {
-      'dt': dt,
+      'dt': dt.millisecondsSinceEpoch ~/ 1000,
       'main': main.toJson(),
       'weather': List<dynamic>.from(weather.map((x) => x.toJson())),
       'clouds': clouds.toJson(),

@@ -1,5 +1,4 @@
 // ignore_for_file: depend_on_referenced_packages
-
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -49,9 +48,10 @@ class ApiService {
     try {
       final http.Response request = await http.get(
           Uri.parse(
-              "$apiUrl/data/2.5/forecast?lat=$lat&lon=$lon&lang$lang&appid=${dotenv.get('API_KEY')}"),
+              "$apiUrl/data/2.5/forecast?lat=$lat&lon=$lon&lang=$lang&appid=${dotenv.get('API_KEY')}"),
           headers: {"content-type": "application/json"});
       final body = json.decode(request.body);
+      log(body.toString());
       if ([200, 201].contains(request.statusCode)) {
         return WeatherModel.fromJson(body);
       }
@@ -66,7 +66,7 @@ class ApiService {
     try {
       final http.Response request = await http.get(
           Uri.parse(
-              "$apiUrl/data/2.5/forecast?q=$city&lang$lang&appid=${dotenv.get('API_KEY')}"),
+              "$apiUrl/data/2.5/forecast?q=$city&lang=$lang&appid=${dotenv.get('API_KEY')}"),
           headers: {"content-type": "application/json"});
       final body = json.decode(request.body);
       if ([200, 201].contains(request.statusCode)) {
