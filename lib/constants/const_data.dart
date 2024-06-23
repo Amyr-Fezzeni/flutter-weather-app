@@ -1,5 +1,7 @@
 import 'package:weather_app/models/unit_model.dart';
 
+const appName = 'Weather App';
+
 List<UnitModel> temperatureList = [
   UnitModel(name: '°C', code: 'C', description: "°C"),
   UnitModel(name: '°F', code: 'F', description: "°F")

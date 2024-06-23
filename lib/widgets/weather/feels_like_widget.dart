@@ -25,8 +25,11 @@ class FeelsLikeWidget extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            Center(
-                child: Image.asset(humidity, height: 80.sp, fit: BoxFit.contain)),
+            Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(right: 20),
+                child:
+                    Image.asset(realfeel, height: 80.sp, fit: BoxFit.contain)),
             const Spacer(),
           ],
         ),

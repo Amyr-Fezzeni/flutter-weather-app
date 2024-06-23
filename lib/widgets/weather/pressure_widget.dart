@@ -25,8 +25,10 @@ class PressureWidget extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            Center(
-                child: Image.asset(humidity, height: 80, fit: BoxFit.contain)),
+            Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(right: 10),
+                child: Image.asset(pressure, height: 80, fit: BoxFit.contain)),
             const Spacer(),
           ],
         ),

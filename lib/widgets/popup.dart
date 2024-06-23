@@ -1,25 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:weather_app/constants/app_style.dart';
 import 'package:weather_app/models/language.dart';
 import 'package:weather_app/models/theme.dart';
 import 'package:weather_app/models/unit_model.dart';
 import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/language.dart';
+import 'package:weather_app/services/navigation_service.dart';
+import 'package:weather_app/services/util.dart';
 import 'package:weather_app/widgets/extra_widgets.dart';
 
-Future<void> customPopup(BuildContext context, Widget widget,
-    {bool maxWidth = true}) async {
+Future<void> customPopup() async {
   return showDialog(
-      context: context,
+      context: NavigationService.navigatorKey.currentContext!,
       builder: (context) {
         return Dialog(
           backgroundColor: context.bgcolor,
           surfaceTintColor: context.bgcolor,
           elevation: 4,
           shape: RoundedRectangleBorder(borderRadius: defaultSmallRadius),
-          child:
-              SizedBox(width: maxWidth ? double.infinity : null, child: widget),
+          child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Gap(10),
+                  Txt('City already exist!', center: true),
+                  const Gap(10),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateColor.resolveWith(
+                              (states) => context.primaryColor)),
+                      onPressed: () {
+                        context.manageCitiesRead.deleteSelectedCities();
+                        context.pop();
+                      },
+                      child: Txt('Ok', color: Colors.white))
+                ],
+              )),
         );
       });
 }
@@ -118,7 +137,7 @@ Widget darkModePopup() {
               padding: const EdgeInsets.only(left: 200),
               child: Row(
                 children: [
-                  Txt(context.appThemeWatch.appTheme.name,
+                  Txt(capitalize(context.appThemeWatch.appTheme.name),
                       color: context.iconColor),
                   Icon(Icons.unfold_more_rounded,
                       color: context.iconColor, size: 25)
@@ -145,7 +164,7 @@ Widget darkModePopup() {
                                 child: Row(
                                   children: [
                                     Text(
-                                      e.name,
+                                      capitalize(e.name),
                                       style: context.appThemeRead.text.copyWith(
                                           color: e.name ==
                                                   context.appThemeRead.appTheme
@@ -184,7 +203,7 @@ Widget languagePopup() {
               padding: const EdgeInsets.only(left: 200),
               child: Row(
                 children: [
-                  Txt(context.dataWatch.currentLanguage.name,
+                  Txt(capitalize(context.dataWatch.currentLanguage.name),
                       color: context.iconColor),
                   Icon(Icons.unfold_more_rounded,
                       color: context.iconColor, size: 25)
@@ -211,7 +230,7 @@ Widget languagePopup() {
                                 child: Row(
                                   children: [
                                     Text(
-                                      e.name,
+                                      capitalize(e.name),
                                       style: context.appThemeRead.text.copyWith(
                                           color: e.name ==
                                                   context.dataRead

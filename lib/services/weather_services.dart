@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/models/weather%20model/city.dart';
@@ -15,6 +17,7 @@ List<Map<String, dynamic>> filterNext24Hour(List<WeatherList> weatherList) {
     String time = DateFormat('HH:mm').format(weather.dt);
     hourlyTemps.add({
       'time': time,
+      'deg':weather.wind.deg,
       'temp': getTemperature(weather.main.temp),
       'wind': getWindSpeed(weather.wind.speed),
       'icon': weather.weather.first.icon
@@ -93,27 +96,41 @@ List<Map<String, dynamic>> getDailyMaxMinTemperatures(
 }
 
 Map<String, String> getSunsetSunriseTime(City city) {
-  tz.initializeTimeZones();
-  DateTime timeInCity =
-      DateTime.now().toUtc().add(Duration(seconds: city.timezone));
-  if (timeInCity.isAfter(city.sunrise)) {
-    return {"title": "Sunset", "date": DateFormat('HH:mm').format(city.sunset)};
+  if (isDay(city)) {
+    return {
+      "title": "Sunset",
+      "date": DateFormat('HH:mm')
+          .format(getTimeZone(time: city.sunset, timezone: city.timezone))
+    };
   }
-  return {"title": "Sunrise", "date": DateFormat('HH:mm').format(city.sunrise)};
+  return {
+    "title": "Sunrise",
+    "date": DateFormat('HH:mm')
+        .format(getTimeZone(time: city.sunrise, timezone: city.timezone))
+  };
 }
 
 bool isDay(City city) {
-  tz.initializeTimeZones();
-  DateTime timeInCity =
-      DateTime.now().toUtc().add(Duration(seconds: city.timezone));
-  return timeInCity.isAfter(city.sunrise);
+  final currentTime = getTimeZoneCityDate(city.timezone);
+  final sunset = getTimeZone(time: city.sunset, timezone: city.timezone);
+  final sunrise = getTimeZone(time: city.sunrise, timezone: city.timezone);
+  return currentTime.isAfter(sunrise) && currentTime.isBefore(sunset);
 }
 
-String getTimeZoneCity(City city) {
+String getTimeZoneCityString(City city) {
   tz.initializeTimeZones();
   DateTime timeInCity =
       DateTime.now().toUtc().add(Duration(seconds: city.timezone));
   return DateFormat('HH:mm').format(timeInCity);
+}
+
+DateTime getTimeZoneCityDate(int timezone) {
+  tz.initializeTimeZones();
+  return DateTime.now().toUtc().add(Duration(seconds: timezone));
+}
+
+DateTime getTimeZone({required DateTime time, required int timezone}) {
+  return time.add(Duration(seconds: timezone));
 }
 
 String getPressure(MainWeather main) {

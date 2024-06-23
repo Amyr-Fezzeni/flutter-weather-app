@@ -29,8 +29,10 @@ class SunTimeWidget extends StatelessWidget {
                 flex: 2,
               ),
               Center(
-                  child:
-                      Image.asset(humidity, height: 80, fit: BoxFit.contain)),
+                  child: Image.asset(
+                      data['title'] == "Sunset" ? sunset : sunrise,
+                      height: 80,
+                      fit: BoxFit.contain)),
               const Spacer(),
             ],
           );

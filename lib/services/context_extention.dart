@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/providers/data_provider.dart';
+import 'package:weather_app/providers/manage_cities_provider.dart';
 import 'package:weather_app/providers/theme_provider.dart';
 import 'package:weather_app/services/page_transitions.dart';
 
@@ -13,6 +14,9 @@ extension ContextExt on BuildContext {
 
   DataProvider get dataWatch => watch<DataProvider>();
   DataProvider get dataRead => read<DataProvider>();
+
+  ManageCityProvider get manageCitiesWatch => watch<ManageCityProvider>();
+  ManageCityProvider get manageCitiesRead => read<ManageCityProvider>();
 
   // App Style
   TextStyle get text => appThemeWatch.text;

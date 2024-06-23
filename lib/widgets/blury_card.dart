@@ -5,7 +5,8 @@ import 'package:weather_app/constants/app_style.dart';
 
 class BluryCard extends StatelessWidget {
   final Widget child;
-  const BluryCard({super.key, required this.child});
+  final double? width;
+  const BluryCard({super.key, required this.child, this.width = double.maxFinite});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class BluryCard extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
           child: Container(
-            width: double.maxFinite,
+            width: width,
             decoration: BoxDecoration(
                 color: Colors.white.withOpacity(.2),
                 borderRadius: defaultBigRadius),

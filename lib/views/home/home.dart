@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/weather%20model/weather_model.dart';
 import 'package:weather_app/services/context_extention.dart';
@@ -20,7 +18,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       AnimationController(vsync: this, duration: const Duration(seconds: 1))
         ..forward();
   late final Animation<double> _animation =
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+      CurvedAnimation(parent: _controller, curve: Curves.linear);
 
   @override
   void initState() {
@@ -38,7 +36,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.bgcolor,
+      backgroundColor: context.primaryColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -61,8 +59,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         height: context.h,
         width: context.w,
         child: Builder(
-          builder: (context) => context.dataWatch.cityList.isNotEmpty ||
-                  context.dataWatch.mainCity != null
+          builder: (context) => (context.dataWatch.cityList.isNotEmpty ||
+                  context.dataWatch.mainCity != null)
               ? GestureDetector(
                   onHorizontalDragEnd: (DragEndDetails details) {
                     if (details.primaryVelocity! > 0) {
@@ -73,8 +71,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       context.dataRead.updateCurrentCityIndex(false);
                       _controller.reset();
                       _controller.forward();
-                    } else {
-                      log(details.primaryVelocity.toString());
                     }
                   },
                   child: FadeTransition(

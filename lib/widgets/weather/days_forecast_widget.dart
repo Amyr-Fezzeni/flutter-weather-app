@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/models/weather%20model/weather_list.dart';
@@ -53,18 +54,18 @@ class DaysForecastWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            SizedBox(
-                width: 100,
+            ConstrainedBox(
+                constraints: const BoxConstraints(minWidth: 100),
                 child: Txt(data['dayName'],
-                    color: Colors.white, translate: false)),
+                    color: Colors.white, translate: false, size: 14.sp)),
             const Spacer(),
-            Image.network(getIconUrl(getDayIcon(data['icons'])),
-                height: 35.sp, width: 35.sp),
+            Image.asset(getAssetIcon(getDayIcon(data['icons'])),
+                height: 35.sp, width: 30.sp),
             const Spacer(
               flex: 2,
             ),
             Txt("${getTemperature(data['max'])} / ${getTemperature(data['min'])}",
-                color: Colors.white, translate: false),
+                color: Colors.white, translate: false, size: 14.sp),
           ],
         ),
         divider(bottom: 5)

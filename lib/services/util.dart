@@ -5,8 +5,10 @@ String capitalize(String? text) {
   return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
 }
 
-String getIconUrl(String icon) =>
-    "https://openweathermap.org/img/wn/$icon@2x.png";
+// String getIconUrl(String icon) =>
+//     "https://openweathermap.org/img/wn/$icon@2x.png";
+
+String getAssetIcon(String icon) => "assets/weather icons/$icon.png";
 
 Map<String, dynamic> getDateDetails(DateTime date) {
   List<String> dayNames = [

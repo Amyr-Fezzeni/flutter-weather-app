@@ -21,14 +21,15 @@ class VisibilityWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Txt("Visibility", color: Colors.white60, bold: true, size: 14.sp),
-            Txt(getVisibility(weatherList),
-                color: Colors.white60, bold: true),
+            Txt(getVisibility(weatherList), color: Colors.white60, bold: true),
             const Spacer(
               flex: 2,
             ),
-            Center(
-                child:
-                    Image.asset(humidity, height: 80.sp, fit: BoxFit.contain)),
+            Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(right: 10),
+                child: Image.asset(visibility,
+                    height: 80.sp, fit: BoxFit.contain)),
             const Spacer(),
           ],
         ),

@@ -4,7 +4,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/constants/const_data.dart';
 import 'package:weather_app/providers/data_provider.dart';
+import 'package:weather_app/providers/manage_cities_provider.dart';
 import 'package:weather_app/providers/theme_provider.dart';
 import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/navigation_service.dart';
@@ -27,7 +29,8 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => AppThemeProvider()),
-      ChangeNotifierProvider(create: (_) => DataProvider())
+      ChangeNotifierProvider(create: (_) => DataProvider()),
+      ChangeNotifierProvider(create: (_) => ManageCityProvider())
     ],
     child: const MyApp(),
   ));
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => MaterialApp(
-        title: 'Weather App',
+        title: appName,
         debugShowCheckedModeBanner: false,
         navigatorKey: NavigationService.navigatorKey,
         theme: ThemeData(

@@ -87,11 +87,11 @@ class Forecast4DaysScreen extends StatelessWidget {
                               Txt(data['dayName'], size: 14.sp),
                               Txt(data['date'], size: 14.sp),
                               const Gap(10),
-                              Image.network(getIconUrl(data['maxIcon']),
-                                  height: 40, width: 40),
+                              Image.asset(getAssetIcon(data['maxIcon']),
+                                  height: 30.sp, width: 30.sp),
                               const Gap(200),
-                              Image.network(getIconUrl(data['minIcon']),
-                                  height: 40, width: 40),
+                              Image.asset(getAssetIcon(data['minIcon']),
+                                  height: 30.sp, width: 30.sp),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

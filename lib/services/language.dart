@@ -50,4 +50,3 @@ Widget Txt(String text,
     textAlign: center ? TextAlign.center : null,
   );
 }
-

@@ -24,21 +24,25 @@ class WindWidget extends StatelessWidget {
             Txt("Wind", color: Colors.white60, bold: true, size: 14.sp),
             Txt(getWindSpeed(wind.speed), color: Colors.white60, bold: true),
             const Spacer(),
-            Container(
-              height: 90.sp,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(windBackground), fit: BoxFit.contain)),
-              child: Center(
-                child: Transform.rotate(
-                  angle: wind.deg * pi / 180,
-                  child: Image.asset(
-                    compas,
-                    height: 40.sp,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                  height: 90.sp,
+                  width: 90.sp,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white12, width: 2),
+                      borderRadius: BorderRadius.circular(100),
+                      image: const DecorationImage(
+                          image: AssetImage(compassBackground),
+                          fit: BoxFit.contain)),
+                  child: SizedBox(
+                    child: Center(
+                      child: Transform.rotate(
+                          angle: wind.deg * pi / 180,
+                          child: Image.asset(compas,
+                              height: 70.sp, fit: BoxFit.contain)),
+                    ),
+                  )),
             ),
           ],
         ),

@@ -1,25 +1,27 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:weather_app/constants/const_data.dart';
 import 'package:weather_app/models/city.dart';
 import 'package:weather_app/models/language.dart';
 import 'package:weather_app/models/unit_model.dart';
 import 'package:weather_app/models/weather%20model/weather_model.dart';
 import 'package:weather_app/services/api_service.dart';
+import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/location_service.dart';
 import 'package:weather_app/services/local_data.dart';
+import 'package:weather_app/services/navigation_service.dart';
+import 'package:weather_app/widgets/popup.dart';
 
 class DataProvider with ChangeNotifier {
-  LanguageModel currentLanguage = LanguageModel.french;
-  late final Box box;
-  List<WeatherModel> cityList = [];
-  WeatherModel? mainCity;
-  int currentCityIndex = 0;
+  late LanguageModel currentLanguage;
+  late UnitModel temperatureUnit;
+  late UnitModel windSpeedUnit;
+  late UnitModel atmospherePressureUnit;
 
-  UnitModel temperatureUnit = temperatureList.first;
-  UnitModel windSpeedUnit = windSpeedList.first;
-  UnitModel atmospherePressureUnit = atmospherePressureList.first;
+  WeatherModel? mainCity;
+  List<WeatherModel> cityList = [];
+  int currentCityIndex = 0;
+  List<GlobalKey> keys = [];
 
   changeDefaultLanguage(LanguageModel language) {
     currentLanguage = language;
@@ -40,32 +42,57 @@ class DataProvider with ChangeNotifier {
     final allData = getCityList();
     if (allData.length < 2) return;
     if (toRight) {
-      currentCityIndex += 1;
-      if (allData.length >= currentCityIndex) {
-        currentCityIndex = 0;
-      }
-    } else {
-      currentCityIndex -= 1;
+      currentCityIndex--;
       if (currentCityIndex < 0) {
         currentCityIndex = allData.length - 1;
       }
+    } else {
+      currentCityIndex++;
+      if (currentCityIndex >= allData.length) {
+        currentCityIndex = 0;
+      }
     }
+    notifyListeners();
+  }
+
+  updateCurrentCityIndexByIndex(int index) {
+    final allData = getCityList();
+    if (allData.length <= index) return;
+
+    currentCityIndex = index;
+
+    notifyListeners();
+  }
+
+  orderCities(oldIndex, newIndex) async {
+    List<WeatherModel> cities = LocalData.getSavedWeather();
+    final id = cities.removeAt(oldIndex);
+    if (newIndex >= cities.length) {
+      cities.add(id);
+    } else {
+      cities.insert(newIndex, id);
+    }
+    cityList = cities;
+    LocalData.saveAllWeatherData(cities);
     notifyListeners();
   }
 
   changeTemperatureUnit(UnitModel unit) {
     temperatureUnit = unit;
     notifyListeners();
+    LocalData.saveWeatherParams(key: 'temp', unit: unit);
   }
 
   changeWindSpeedUnit(UnitModel unit) {
     windSpeedUnit = unit;
     notifyListeners();
+    LocalData.saveWeatherParams(key: 'wind', unit: unit);
   }
 
   changeatmospherePressureUnit(UnitModel unit) {
     atmospherePressureUnit = unit;
     notifyListeners();
+    LocalData.saveWeatherParams(key: 'pressure', unit: unit);
   }
 
   Future<dynamic> getListCities(String query) async {
@@ -81,29 +108,40 @@ class DataProvider with ChangeNotifier {
             lang: currentLanguage.name.substring(0, 2),
           )
         : await ApiService.getForecastWeatherDataByCity(
-            city: "${city.name!},${city.state!},${city.country!}",
+            city: "${city.name},${city.state},${city.country}",
             lang: currentLanguage.name.substring(0, 2),
           );
 
-    if (cityData != null) {
-      log(cityData.toString());
-      LocalData.saveWeatherData(cityData);
-      cityList.add(cityData);
-      notifyListeners();
+    if (cityData == null) {
+      
+      return;}
+    if (cityList.map((city) => city.city.id).contains(cityData.city.id)) {
+      customPopup();
+      return;
     }
+    LocalData.saveWeatherData(cityData);
+    cityList.add(cityData);
+    notifyListeners();
+    NavigationService.navigatorKey.currentContext!.pop();
   }
 
-  Future<void> removeCity(WeatherModel city) async {
-    cityList.removeWhere((c) => c.city.id == city.city.id);
-    LocalData.removeWeatherData(city);
+  Future<void> removeCities(List<int> ids) async {
+    cityList.removeWhere((city) => ids.contains(city.city.id));
+    LocalData.saveAllWeatherData(cityList);
     notifyListeners();
   }
 
   Future<void> initData() async {
     currentLanguage = LocalData.getAppLanguage();
+    temperatureUnit = LocalData.getWeatherParams(key: 'temp');
+    windSpeedUnit = LocalData.getWeatherParams(key: 'wind');
+    atmospherePressureUnit = LocalData.getWeatherParams(key: 'pressure');
     mainCity = LocalData.getMainWeather();
     cityList = LocalData.getSavedWeather();
 
+    keys = getCityList()
+        .map((e) => GlobalKey(debugLabel: e.city.id.toString()))
+        .toList();
     await getCurrentLocation();
     updateWeatherData();
   }
@@ -135,7 +173,6 @@ class DataProvider with ChangeNotifier {
 
   Future<void> getCurrentLocation() async {
     final data = await LocationService.requestLocation();
-    log(data.toString());
     if (data == null) return;
     WeatherModel? cityData = await ApiService.getForecastWeatherDataByCordinate(
         lat: data.latitude,

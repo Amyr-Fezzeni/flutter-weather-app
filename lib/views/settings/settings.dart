@@ -3,7 +3,6 @@ import 'package:weather_app/constants/const_data.dart';
 import 'package:weather_app/models/unit_model.dart';
 import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/widgets/appbar.dart';
-import 'package:weather_app/widgets/extra_widgets.dart';
 import 'package:weather_app/widgets/popup.dart';
 
 class Settings extends StatefulWidget {

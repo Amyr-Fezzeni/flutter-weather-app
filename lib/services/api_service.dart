@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'dart:convert';
-import 'dart:developer';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/models/city.dart';
@@ -51,12 +51,11 @@ class ApiService {
               "$apiUrl/data/2.5/forecast?lat=$lat&lon=$lon&lang=$lang&appid=${dotenv.get('API_KEY')}"),
           headers: {"content-type": "application/json"});
       final body = json.decode(request.body);
-      log(body.toString());
       if ([200, 201].contains(request.statusCode)) {
         return WeatherModel.fromJson(body);
       }
     } catch (e) {
-      log('error: $e');
+      // log('error: $e');
     }
     return null;
   }
@@ -73,7 +72,7 @@ class ApiService {
         return WeatherModel.fromJson(body);
       }
     } catch (e) {
-      log('error: $e');
+      // log('error: $e');
     }
     return null;
   }
@@ -90,7 +89,7 @@ class ApiService {
         return List<CityInfo>.from(body.map((data) => CityInfo.fromJson(data)));
       }
     } catch (e) {
-      log('error: $e');
+      // log('error: $e');
     }
     return cities;
   }

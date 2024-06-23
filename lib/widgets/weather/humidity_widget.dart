@@ -25,7 +25,9 @@ class HumidityWidget extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            Center(
+            Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(right: 10),
                 child:
                     Image.asset(humidity, height: 80.sp, fit: BoxFit.contain)),
             const Spacer(),

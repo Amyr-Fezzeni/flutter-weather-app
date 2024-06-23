@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -41,27 +42,43 @@ class HourlyTemperatureWidget extends StatelessWidget {
   }
 
   Widget hourWeatherWidget(Map<String, dynamic> data) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: const BoxDecoration(
-          border: Border(
-        right: BorderSide(
-          color: Colors.white54,
-          width: .5,
+    return Builder(builder: (context) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: const BoxDecoration(
+            border: Border(
+          right: BorderSide(
+            color: Colors.white38,
+            width: .5,
+          ),
+        )),
+        child: Column(
+          children: [
+            Txt(data['temp'],
+                bold: true, color: Colors.white, translate: false, size: 18.sp),
+            const Gap(10),
+            Image.asset(getAssetIcon(data['icon']),
+                height: 30.sp, width: 30.sp),
+            const Gap(15),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Transform.rotate(
+                  angle: data['deg'] * pi / 180,
+                  child: const Icon(Icons.arrow_upward_rounded,
+                      size: 10, color: Colors.white),
+                ),
+                const Gap(2),
+                Txt(data['wind'],
+                    color: Colors.white, translate: false, size: 12.sp),
+              ],
+            ),
+            const Gap(5),
+            Txt(data['time'],
+                color: Colors.white, translate: false, size: 14.sp),
+          ],
         ),
-      )),
-      child: Column(
-        children: [
-          Txt(data['temp'],
-              bold: true, color: Colors.white, translate: false, size: 18.sp),
-          const Gap(10),
-          Image.network(getIconUrl(data['icon']), height: 40, width: 40),
-          const Gap(15),
-          Txt(data['wind'], color: Colors.white, translate: false, size: 14.sp),
-          const Gap(5),
-          Txt(data['time'], color: Colors.white, translate: false),
-        ],
-      ),
-    );
+      );
+    });
   }
 }

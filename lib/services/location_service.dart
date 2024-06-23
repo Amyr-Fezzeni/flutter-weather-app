@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -10,10 +10,9 @@ class LocationService {
         return null;
       }
       final Position location = await Geolocator.getCurrentPosition();
-      log(location.toString());
+
       return location;
-    } on Exception catch (e) {
-      log(e.toString());
+    } on Exception {
       return null;
     }
   }

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:weather_app/constants/app_style.dart';
 import 'package:weather_app/models/theme.dart';
@@ -68,7 +68,6 @@ class AppThemeProvider with ChangeNotifier {
         } else {
           setLightTheme();
         }
-        log('Dark mode changed');
         notifyListeners();
       }
     });
