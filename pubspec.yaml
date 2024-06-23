@@ -58,7 +58,7 @@ flutter:
 
 
 flutter_icons:
-  image_path: "assets/logo/transparent logo.png"
+  image_path: "assets/logo/app_logo_icon.png"
   adaptive_icon_background: "#ffffff"
   android: true
   ios: true
@@ -66,12 +66,12 @@ flutter_icons:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/logo/transparent logo.png
+  image: assets/logo/splash_screen_logo.png
   color_dark: "#121212"
   image_dark: assets/logo/transparent logo.png
 
   android_12:
-    image: assets/logo/transparent logo.png
+    image: assets/logo/splash_screen_logo.png
     icon_background_color: "#ffffff"
-    image_dark: assets/logo/transparent logo.png
+    image_dark: assets/logo/splash_screen_logo.png
     icon_background_color_dark: "#121212"

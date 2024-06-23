@@ -41,7 +41,7 @@ class _ManageCitiesState extends State<ManageCities> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Txt(context.manageCitiesRead.getTitle(),
-                            bold: true),
+                            bold: true, translate: false),
                       ),
                     Container(
                       width: double.maxFinite,
@@ -91,18 +91,20 @@ class _ManageCitiesState extends State<ManageCities> {
                           onReorder: (oldIndex, newIndex) =>
                               context.dataRead.orderCities(oldIndex, newIndex)),
                     ),
+                    const Gap(50)
                   ],
                 ),
               ),
             ),
             if (context.manageCitiesWatch.manageCities)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10)
+                    .copyWith(bottom: 10),
                 child: Center(
                   child: InkWell(
                     onTap: context.manageCitiesRead.deleteSelectedCities,
                     child: Icon(Icons.delete_outline_rounded,
-                        color: context.iconColor, size: 25.sp),
+                        color: context.iconColor, size: 30.sp),
                   ),
                 ),
               ),

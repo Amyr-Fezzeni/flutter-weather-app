@@ -11,7 +11,7 @@ List<UnitModel> windSpeedList = [
   UnitModel(
       name: '(km/h)', code: 'km/h', description: "Kilometers per hour (km/h)"),
   UnitModel(
-      name: 'Miles per hour (mph)',
+      name: '(mph)',
       code: 'mp/h',
       description: "Miles per hour (mph)"),
   UnitModel(name: '(m/s)', code: 'm/s', description: "Meters per second (m/s)"),

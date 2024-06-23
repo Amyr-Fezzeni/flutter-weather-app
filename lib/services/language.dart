@@ -1,33 +1,19 @@
 // ignore_for_file: non_constant_identifier_names
+
+
 import 'package:flutter/material.dart';
+import 'package:weather_app/constants/language.dart';
+import 'package:weather_app/models/language.dart';
 import 'package:weather_app/services/context_extention.dart';
+import 'package:weather_app/services/local_data.dart';
 import 'navigation_service.dart';
 
-// enum LanguageModel { french, english }
 
 String txt(String key) {
-  // log(DataPrefrences.getAccountType());
-  // return key;
-  // LanguageModel language = NavigationService.navigatorKey.currentContext!
-  //     .dataRead
-  //     .currentLanguage;
-  // addKey(key);
-  return key;
-  // return language == LanguageModel.english
-  //     ? english[key] ?? key
-  //     : frensh[key] ?? key;
+  LanguageModel language = LocalData.getAppLanguage();
+  return languageData[key]?[language.name] ?? "$key***";
 }
 
-// void addKey(String key) {
-//   File file = File('/Users/letaff/flutter projects/flutter_weather_app/assets/language.json');
-//   Map<String, dynamic> data =
-//       jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
-//   if (!data.containsKey(key)) {
-//     data.addAll({key: key});
-//     file.writeAsStringSync(jsonEncode(data));
-//     log('$key saved');
-//   }
-// }
 
 Widget Txt(String text,
     {Color? color,

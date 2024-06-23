@@ -24,7 +24,7 @@ class SunTimeWidget extends StatelessWidget {
             children: [
               Txt(data['title'] as String,
                   color: Colors.white60, bold: true, size: 14.sp),
-              Txt(data['date'] as String, color: Colors.white60, bold: true),
+              Txt(data['date'] as String, color: Colors.white60, bold: true,translate: false),
               const Spacer(
                 flex: 2,
               ),

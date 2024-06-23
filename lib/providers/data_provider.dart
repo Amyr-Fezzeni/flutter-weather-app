@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+// import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/city.dart';
 import 'package:weather_app/models/language.dart';
@@ -20,35 +19,41 @@ class DataProvider with ChangeNotifier {
 
   WeatherModel? mainCity;
   List<WeatherModel> cityList = [];
+  List<WeatherModel> allCityList = [];
+  Map<int, GlobalKey> keys = {};
   int currentCityIndex = 0;
-  List<GlobalKey> keys = [];
 
   changeDefaultLanguage(LanguageModel language) {
+    if (currentLanguage == language) return;
     currentLanguage = language;
     LocalData.saveAppLanguage(language);
     notifyListeners();
+    updateWeatherData();
   }
 
-  List<WeatherModel> getCityList() {
-    List<WeatherModel> allData = [];
-    if (mainCity != null) {
-      allData.add(mainCity!);
+  void getCityLists() {
+    allCityList = [];
+    keys.clear();
+    if (mainCity != null) allCityList.add(mainCity!);
+    allCityList.addAll(cityList);
+    for (var city in allCityList) {
+      keys[city.city.id] = GlobalObjectKey(city.city.coord);
     }
-    allData.addAll(cityList);
-    return allData;
+    if (currentCityIndex >= allCityList.length - 1) {
+      currentCityIndex = 0;
+    }
   }
 
   updateCurrentCityIndex(bool toRight) {
-    final allData = getCityList();
-    if (allData.length < 2) return;
+    if (allCityList.length < 2) return;
     if (toRight) {
       currentCityIndex--;
       if (currentCityIndex < 0) {
-        currentCityIndex = allData.length - 1;
+        currentCityIndex = allCityList.length - 1;
       }
     } else {
       currentCityIndex++;
-      if (currentCityIndex >= allData.length) {
+      if (currentCityIndex >= allCityList.length) {
         currentCityIndex = 0;
       }
     }
@@ -56,11 +61,8 @@ class DataProvider with ChangeNotifier {
   }
 
   updateCurrentCityIndexByIndex(int index) {
-    final allData = getCityList();
-    if (allData.length <= index) return;
-
+    if (allCityList.length <= index) return;
     currentCityIndex = index;
-
     notifyListeners();
   }
 
@@ -73,6 +75,7 @@ class DataProvider with ChangeNotifier {
       cities.insert(newIndex, id);
     }
     cityList = cities;
+    getCityLists();
     LocalData.saveAllWeatherData(cities);
     notifyListeners();
   }
@@ -100,27 +103,37 @@ class DataProvider with ChangeNotifier {
   }
 
   Future<void> addCity(CityInfo city) async {
-    log(city.toString());
-    WeatherModel? cityData = (city.name ?? '').isEmpty
-        ? await ApiService.getForecastWeatherDataByCordinate(
-            lat: city.lat!,
-            lon: city.lon!,
-            lang: currentLanguage.name.substring(0, 2),
-          )
-        : await ApiService.getForecastWeatherDataByCity(
-            city: "${city.name},${city.state},${city.country}",
-            lang: currentLanguage.name.substring(0, 2),
-          );
+    WeatherModel? cityData;
+    String req = [city.name, city.state, city.country]
+        .where((e) => e != null)
+        .join(', ');
+
+    if (city.lat != null && city.lon != null) {
+      cityData = await ApiService.getForecastWeatherDataByCordinate(
+        lat: city.lat!,
+        lon: city.lon!,
+        lang: currentLanguage.name.substring(0, 2),
+      );
+    } else if (req.isNotEmpty) {
+      cityData = await ApiService.getForecastWeatherDataByCity(
+        city: "${city.name}, ${city.state}, ${city.country}",
+        lang: currentLanguage.name.substring(0, 2),
+      );
+    }
 
     if (cityData == null) {
-      
-      return;}
-    if (cityList.map((city) => city.city.id).contains(cityData.city.id)) {
-      customPopup();
+      customPopup(
+          message:
+              "Sorry we don't have data for this city at this moment, please try later.");
+      return;
+    }
+    if (keys.keys.contains(cityData.city.id)) {
+      customPopup(message: 'City already exist!');
       return;
     }
     LocalData.saveWeatherData(cityData);
     cityList.add(cityData);
+    getCityLists();
     notifyListeners();
     NavigationService.navigatorKey.currentContext!.pop();
   }
@@ -128,6 +141,7 @@ class DataProvider with ChangeNotifier {
   Future<void> removeCities(List<int> ids) async {
     cityList.removeWhere((city) => ids.contains(city.city.id));
     LocalData.saveAllWeatherData(cityList);
+    getCityLists();
     notifyListeners();
   }
 
@@ -138,10 +152,8 @@ class DataProvider with ChangeNotifier {
     atmospherePressureUnit = LocalData.getWeatherParams(key: 'pressure');
     mainCity = LocalData.getMainWeather();
     cityList = LocalData.getSavedWeather();
+    getCityLists();
 
-    keys = getCityList()
-        .map((e) => GlobalKey(debugLabel: e.city.id.toString()))
-        .toList();
     await getCurrentLocation();
     updateWeatherData();
   }
@@ -155,6 +167,7 @@ class DataProvider with ChangeNotifier {
       if (cityData != null) {
         mainCity = cityData;
         LocalData.saveWeatherData(cityData, isMain: true);
+        getCityLists();
         notifyListeners();
       }
     }
@@ -168,6 +181,7 @@ class DataProvider with ChangeNotifier {
       newCitiesData.add(cityData);
     }
     cityList = newCitiesData;
+    getCityLists();
     notifyListeners();
   }
 
@@ -182,6 +196,7 @@ class DataProvider with ChangeNotifier {
 
     LocalData.saveWeatherData(cityData, isMain: true);
     mainCity = cityData;
+    getCityLists();
     notifyListeners();
   }
 }

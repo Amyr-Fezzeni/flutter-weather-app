@@ -22,7 +22,8 @@ class WindWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Txt("Wind", color: Colors.white60, bold: true, size: 14.sp),
-            Txt(getWindSpeed(wind.speed), color: Colors.white60, bold: true),
+            Txt(getWindSpeed(wind.speed),
+                color: Colors.white60, bold: true, translate: false),
             const Spacer(),
             Align(
               alignment: Alignment.centerRight,

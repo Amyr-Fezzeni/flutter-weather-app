@@ -31,9 +31,9 @@ class City {
       population: json['population'],
       timezone: json['timezone'],
       sunrise:
-          DateTime.fromMillisecondsSinceEpoch((json['sunrise'] * 1000).toInt()),
+          DateTime.fromMillisecondsSinceEpoch((json['sunrise'] * 1000).toInt(), isUtc: true),
       sunset:
-          DateTime.fromMillisecondsSinceEpoch((json['sunset'] * 1000).toInt()),
+          DateTime.fromMillisecondsSinceEpoch((json['sunset'] * 1000).toInt(), isUtc: true),
     );
   }
 
@@ -53,5 +53,25 @@ class City {
   @override
   String toString() {
     return 'City(id: $id, name: $name, coord: $coord, country: $country, population: $population, timezone: $timezone, sunrise: $sunrise, sunset: $sunset)';
+  }
+
+  @override
+  bool operator ==(covariant City other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.name == name &&
+        other.coord == coord &&
+        other.country == country &&
+        other.timezone == timezone;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        name.hashCode ^
+        coord.hashCode ^
+        country.hashCode ^
+        timezone.hashCode;
   }
 }

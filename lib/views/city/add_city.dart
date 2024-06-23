@@ -115,19 +115,26 @@ class _AddCityState extends State<AddCity> {
                                 Txt('No results.')
                               ],
                               ...locationsData
-                                  .map((e) => Builder(builder: (context) {
+                                  .map((city) => Builder(builder: (context) {
                                         return ListTile(
                                             onTap: () =>
-                                                context.dataRead.addCity(e),
-                                            title: Txt(e.name ?? '',
+                                                context.dataRead.addCity(city),
+                                            title: Txt(city.name ?? '',
                                                 translate: false, bold: true),
                                             subtitle: Txt(
-                                                [e.country, e.state].join(', '),
+                                                [
+                                                  city.name,
+                                                  city.state,
+                                                  city.country
+                                                ]
+                                                    .where((e) => e != null)
+                                                    .join(', '),
                                                 translate: false,
                                                 color: context.iconColor,
                                                 size: 14.sp),
-                                            trailing: const Icon(Icons.add,
-                                                color: Colors.white, size: 20));
+                                            trailing: Icon(Icons.add,
+                                                color: context.iconColor,
+                                                size: 20));
                                       }))
                             ],
                           ),

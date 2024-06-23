@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/weather%20model/weather_model.dart';
 import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/language.dart';
 import 'package:weather_app/views/city/manage_cities.dart';
@@ -74,15 +73,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     }
                   },
                   child: FadeTransition(
-                    opacity: _animation,
-                    child: Builder(builder: (context) {
-                      List<WeatherModel> cityList =
-                          context.dataRead.getCityList();
-                      return WeatherDetails(
-                          weatherData:
-                              cityList[context.dataWatch.currentCityIndex]);
-                    }),
-                  ),
+                      opacity: _animation,
+                      child: WeatherDetails(
+                          weatherData: context.dataWatch.allCityList[
+                              context.dataWatch.currentCityIndex])),
                 )
               : Center(
                   child: ElevatedButton(

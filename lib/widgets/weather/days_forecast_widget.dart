@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/models/weather%20model/weather_list.dart';
@@ -35,11 +34,8 @@ class DaysForecastWidget extends StatelessWidget {
               child: SizedBox(
                 height: 50,
                 child: Center(
-                  child: Txt("4-days forecast",
-                      bold: true,
-                      color: Colors.white,
-                      translate: false,
-                      size: 14.sp),
+                  child: Txt("5-day forecast",
+                      bold: true, color: Colors.white, size: 14.sp),
                 ),
               ),
             ))
@@ -56,8 +52,7 @@ class DaysForecastWidget extends StatelessWidget {
           children: [
             ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: 100),
-                child: Txt(data['dayName'],
-                    color: Colors.white, translate: false, size: 14.sp)),
+                child: Txt(data['dayName'], color: Colors.white, size: 14.sp)),
             const Spacer(),
             Image.asset(getAssetIcon(getDayIcon(data['icons'])),
                 height: 35.sp, width: 30.sp),

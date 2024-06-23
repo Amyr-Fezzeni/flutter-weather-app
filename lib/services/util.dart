@@ -9,6 +9,12 @@ String capitalize(String? text) {
 //     "https://openweathermap.org/img/wn/$icon@2x.png";
 
 String getAssetIcon(String icon) => "assets/weather icons/$icon.png";
+int getAverageNumber(List<int> numbers) {
+  if (numbers.isEmpty) return 0;
+
+  int sum = numbers.reduce((a, b) => a + b);
+  return sum ~/ numbers.length;
+}
 
 Map<String, dynamic> getDateDetails(DateTime date) {
   List<String> dayNames = [

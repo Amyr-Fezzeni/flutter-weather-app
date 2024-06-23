@@ -61,7 +61,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
             if (isRaining)
               ParallaxRain(
                 dropColors: const [Colors.grey],
-                key: context.dataWatch.keys[context.dataWatch.currentCityIndex],
+                key: context.dataWatch.keys[widget.weatherData.city.id],
                 trail: true,
                 dropWidth: .4,
                 numberOfDrops: 200,

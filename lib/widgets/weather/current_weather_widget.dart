@@ -21,9 +21,10 @@ class CurrentWeatherWidget extends StatelessWidget {
             Center(
                 child: Txt(getTemperature(weatherData.list.first.main.temp),
                     style: context.title
-                        .copyWith(color: Colors.white, fontSize: 100.sp))),
-            Txt(weatherData.city.name,
-                bold: true, size: 20.sp, color: Colors.white),
+                        .copyWith(color: Colors.white, fontSize: 100.sp),
+                    translate: false)),
+            Txt("${weatherData.city.country}, ${weatherData.city.name}",
+                bold: true, size: 20.sp, color: Colors.white, translate: false),
             Builder(builder: (context) {
               List<IconData> icons = [];
               if (context.dataWatch.mainCity != null) {

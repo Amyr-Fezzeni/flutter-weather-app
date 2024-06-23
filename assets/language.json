@@ -1,0 +1,230 @@
+{
+    "Add city": {
+        "english": "Add city",
+        "french": ""
+    },
+    "Settings": {
+        "english": "Settings",
+        "french": ""
+    },
+    "Enter Location": {
+        "english": "Enter Location",
+        "french": ""
+    },
+    "Manage cities": {
+        "english": "Manage cities",
+        "french": ""
+    },
+    "Cancel": {
+        "english": "Cancel",
+        "french": ""
+    },
+    "H": {
+        "english": "H",
+        "french": ""
+    },
+    "L": {
+        "english": "L",
+        "french": ""
+    },
+    "Forecast": {
+        "english": "Forecast",
+        "french": ""
+    },
+    "24-hour forecast": {
+        "english": "24-hour forecast",
+        "french": ""
+    },
+    "Wind": {
+        "english": "Wind",
+        "french": ""
+    },
+    "Humidity": {
+        "english": "Humidity",
+        "french": ""
+    },
+    "Real feel": {
+        "english": "Real feel",
+        "french": ""
+    },
+    "Pressure": {
+        "english": "Pressure",
+        "french": ""
+    },
+    "Sunset": {
+        "english": "Sunset",
+        "french": ""
+    },
+    "Visibility": {
+        "english": "Visibility",
+        "french": ""
+    },
+    "City already exist!": {
+        "english": "City already exist!",
+        "french": ""
+    },
+    "Sorry we don't have data for this city at this moment, please try later.": {
+        "english": "Sorry we don't have data for this city at this moment, please try later.",
+        "french": ""
+    },
+    "Ok": {
+        "english": "Ok",
+        "french": ""
+    },
+    "Sunrise": {
+        "english": "Sunrise",
+        "french": ""
+    },
+    "Today": {
+        "english": "Today",
+        "french": ""
+    },
+    "Tomorrow": {
+        "english": "Tomorrow",
+        "french": ""
+    },
+    "Tuesday": {
+        "english": "Tuesday",
+        "french": ""
+    },
+    "Wednesday": {
+        "english": "Wednesday",
+        "french": ""
+    },
+    "4-day forecast": {
+        "english": "4-day forecast",
+        "french": ""
+    },
+    "Temperature units": {
+        "english": "Temperature units",
+        "french": ""
+    },
+    "°C": {
+        "english": "°C",
+        "french": ""
+    },
+    "Wind speed units": {
+        "english": "Wind speed units",
+        "french": ""
+    },
+    "(km/h)": {
+        "english": "(km/h)",
+        "french": ""
+    },
+    "Atmosphere pressure units": {
+        "english": "Atmosphere pressure units",
+        "french": ""
+    },
+    "(mb)": {
+        "english": "(mb)",
+        "french": ""
+    },
+    "Dark mode": {
+        "english": "Dark mode",
+        "french": ""
+    },
+    "System": {
+        "english": "System",
+        "french": ""
+    },
+    "Language": {
+        "english": "Language",
+        "french": ""
+    },
+    "French": {
+        "english": "French",
+        "french": ""
+    },
+    "°F": {
+        "english": "°F",
+        "french": ""
+    },
+    "Kilometers per hour (km/h)": {
+        "english": "Kilometers per hour (km/h)",
+        "french": ""
+    },
+    "Miles per hour (mph)": {
+        "english": "Miles per hour (mph)",
+        "french": ""
+    },
+    "Meters per second (m/s)": {
+        "english": "Meters per second (m/s)",
+        "french": ""
+    },
+    "Feet per second (ft/s)": {
+        "english": "Feet per second (ft/s)",
+        "french": ""
+    },
+    "Knots (kt)": {
+        "english": "Knots (kt)",
+        "french": ""
+    },
+    "Millibars (mb)": {
+        "english": "Millibars (mb)",
+        "french": ""
+    },
+    "Inch of mercury (inHg)": {
+        "english": "Inch of mercury (inHg)",
+        "french": ""
+    },
+    "Standard atmospheres (atm)": {
+        "english": "Standard atmospheres (atm)",
+        "french": ""
+    },
+    "(inHg)": {
+        "english": "(inHg)",
+        "french": ""
+    },
+    "Dark": {
+        "english": "Dark",
+        "french": ""
+    },
+    "Light": {
+        "english": "Light",
+        "french": ""
+    },
+    "English": {
+        "english": "English",
+        "french": ""
+    },
+    "(ft/s)": {
+        "english": "(ft/s)",
+        "french": ""
+    },
+    "(kt)": {
+        "english": "(kt)",
+        "french": ""
+    },
+    "No results.": {
+        "english": "No results.",
+        "french": ""
+    },
+    "item selected": {
+        "english": "item selected",
+        "french": ""
+    },
+    "items selected": {
+        "english": "items selected",
+        "french": ""
+    },
+    "Thursday": {
+        "english": "Thursday",
+        "french": ""
+    },
+    "Friday": {
+        "english": "Friday",
+        "french": ""
+    },
+    "(mph)": {
+        "english": "(mph)",
+        "french": ""
+    },
+    "(m/s)": {
+        "english": "(m/s)",
+        "french": ""
+    },
+    "(atm)": {
+        "english": "(atm)",
+        "french": ""
+    }
+}

@@ -11,7 +11,7 @@ import 'package:weather_app/services/navigation_service.dart';
 import 'package:weather_app/services/util.dart';
 import 'package:weather_app/widgets/extra_widgets.dart';
 
-Future<void> customPopup() async {
+Future<void> customPopup({required String message}) async {
   return showDialog(
       context: NavigationService.navigatorKey.currentContext!,
       builder: (context) {
@@ -26,7 +26,7 @@ Future<void> customPopup() async {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Gap(10),
-                  Txt('City already exist!', center: true),
+                  Txt(message, center: true),
                   const Gap(10),
                   ElevatedButton(
                       style: ButtonStyle(
@@ -99,7 +99,7 @@ Widget settingsPopup(
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      e.description,
+                                      txt(e.description),
                                       style: context.appThemeRead.text.copyWith(
                                           fontSize: 14.sp,
                                           color: e.name == selectedValue.name
@@ -164,7 +164,7 @@ Widget darkModePopup() {
                                 child: Row(
                                   children: [
                                     Text(
-                                      capitalize(e.name),
+                                      txt(capitalize(e.name)),
                                       style: context.appThemeRead.text.copyWith(
                                           color: e.name ==
                                                   context.appThemeRead.appTheme
@@ -230,7 +230,7 @@ Widget languagePopup() {
                                 child: Row(
                                   children: [
                                     Text(
-                                      capitalize(e.name),
+                                      txt(capitalize(e.name)),
                                       style: context.appThemeRead.text.copyWith(
                                           color: e.name ==
                                                   context.dataRead

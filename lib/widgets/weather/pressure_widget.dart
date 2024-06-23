@@ -21,7 +21,8 @@ class PressureWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Txt("Pressure", color: Colors.white60, bold: true, size: 14.sp),
-            Txt(getPressure(main), color: Colors.white60, bold: true),
+            Txt(getPressure(main.pressure.toDouble()),
+                color: Colors.white60, bold: true, translate: false),
             const Spacer(
               flex: 2,
             ),

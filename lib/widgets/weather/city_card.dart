@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/constants/app_style.dart';
 import 'package:weather_app/models/weather%20model/weather_model.dart';
@@ -127,7 +126,8 @@ class _CityCardState extends State<CityCard> {
                               widget.weatherData.list.first.main.temp),
                           color: Colors.white,
                           bold: true,
-                          size: 20.sp),
+                          size: 20.sp,
+                          translate: false),
                     ),
                     if (context.manageCitiesWatch.manageCities &&
                         widget.canBeDeleted)

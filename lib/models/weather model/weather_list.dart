@@ -30,7 +30,7 @@ class WeatherList {
 
   factory WeatherList.fromJson(Map<String, dynamic> json) {
     return WeatherList(
-      dt: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
+      dt: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000, isUtc: true),
       main: MainWeather.fromJson(Map<String, dynamic>.from(json['main'])),
       weather: List<Weather>.from(json['weather']
           .map((x) => Weather.fromJson(Map<String, dynamic>.from(x)))),

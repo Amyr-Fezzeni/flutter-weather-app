@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/models/weather%20model/city.dart';
@@ -7,7 +5,6 @@ import 'package:weather_app/models/weather%20model/main_weather.dart';
 import 'package:weather_app/models/weather%20model/weather_list.dart';
 import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/navigation_service.dart';
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:weather_app/services/util.dart';
 
 List<Map<String, dynamic>> filterNext24Hour(List<WeatherList> weatherList) {
@@ -17,7 +14,7 @@ List<Map<String, dynamic>> filterNext24Hour(List<WeatherList> weatherList) {
     String time = DateFormat('HH:mm').format(weather.dt);
     hourlyTemps.add({
       'time': time,
-      'deg':weather.wind.deg,
+      'deg': weather.wind.deg,
       'temp': getTemperature(weather.main.temp),
       'wind': getWindSpeed(weather.wind.speed),
       'icon': weather.weather.first.icon
@@ -30,7 +27,7 @@ List<Map<String, dynamic>> filterNext24Hour(List<WeatherList> weatherList) {
 List<Map<String, dynamic>> get5DaysData(List<WeatherList> weatherList) {
   Map<String, Map<String, dynamic>> hourlyTemps = {};
 
-  for (var weather in weatherList.take(24)) {
+  for (var weather in weatherList) {
     Map<String, dynamic> dateDetails = getDateDetails(weather.dt);
     String date = dateDetails['date'];
     if (!hourlyTemps.containsKey(date)) {
@@ -44,6 +41,8 @@ List<Map<String, dynamic>> get5DaysData(List<WeatherList> weatherList) {
         'wind': [
           {'speed': weather.wind.speed, "deg": weather.wind.deg}
         ],
+        'humidity': [weather.main.humidity],
+        'pressure': [weather.main.pressure],
         'icons': weather.weather.map((e) => e.icon).toList(),
       };
     } else {
@@ -57,13 +56,24 @@ List<Map<String, dynamic>> get5DaysData(List<WeatherList> weatherList) {
       }
       hourlyTemps[date]!['wind']
           .add({'speed': weather.wind.speed, "deg": weather.wind.deg});
+      hourlyTemps[date]!['humidity'].add(weather.main.humidity);
+      hourlyTemps[date]!['pressure'].add(weather.main.pressure);
       hourlyTemps[date]!['icons'].addAll(weather.weather.map((e) => e.icon));
     }
   }
   for (var key in hourlyTemps.keys) {
     List<Map<String, dynamic>> windList = hourlyTemps[key]!['wind'];
     hourlyTemps[key]!['wind'] = getAverageWindSpeed(windList);
+    hourlyTemps[key]!['humidity'] =
+        getAverageNumber(hourlyTemps[key]!['humidity']);
+    hourlyTemps[key]!['pressure'] =
+        getAverageNumber(hourlyTemps[key]!['pressure']).toDouble();
   }
+
+  final todayData = weatherList
+      .map((e) => getDateDetails(e.dt))
+      .where((c) => c['date'] == hourlyTemps.values.first['date']);
+  if (todayData.length < 2) return hourlyTemps.values.skip(1).toList();
   return hourlyTemps.values.toList();
 }
 
@@ -96,18 +106,13 @@ List<Map<String, dynamic>> getDailyMaxMinTemperatures(
 }
 
 Map<String, String> getSunsetSunriseTime(City city) {
+  final sunset = getTimeZone(time: city.sunset, timezone: city.timezone);
+  final sunrise = getTimeZone(time: city.sunrise, timezone: city.timezone);
+
   if (isDay(city)) {
-    return {
-      "title": "Sunset",
-      "date": DateFormat('HH:mm')
-          .format(getTimeZone(time: city.sunset, timezone: city.timezone))
-    };
+    return {"title": "Sunset", "date": DateFormat('HH:mm').format(sunset)};
   }
-  return {
-    "title": "Sunrise",
-    "date": DateFormat('HH:mm')
-        .format(getTimeZone(time: city.sunrise, timezone: city.timezone))
-  };
+  return {"title": "Sunrise", "date": DateFormat('HH:mm').format(sunrise)};
 }
 
 bool isDay(City city) {
@@ -118,14 +123,12 @@ bool isDay(City city) {
 }
 
 String getTimeZoneCityString(City city) {
-  tz.initializeTimeZones();
   DateTime timeInCity =
       DateTime.now().toUtc().add(Duration(seconds: city.timezone));
   return DateFormat('HH:mm').format(timeInCity);
 }
 
 DateTime getTimeZoneCityDate(int timezone) {
-  tz.initializeTimeZones();
   return DateTime.now().toUtc().add(Duration(seconds: timezone));
 }
 
@@ -133,11 +136,11 @@ DateTime getTimeZone({required DateTime time, required int timezone}) {
   return time.add(Duration(seconds: timezone));
 }
 
-String getPressure(MainWeather main) {
+String getPressure(double pressure) {
   BuildContext context = NavigationService.navigatorKey.currentContext!;
   const double hpaToInHg = 0.02953;
   const double hpaToAtm = 0.000986923;
-  double pressure = main.pressure.toDouble();
+  // double pressure = pressure.toDouble();
   switch (context.dataWatch.atmospherePressureUnit.code) {
     case 'inHg':
       pressure *= hpaToInHg;
