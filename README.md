@@ -3,7 +3,7 @@
 ## Description
 Cette application Météo pour Android et iOS permet de suivre les conditions météorologiques actuelles et les prévisions pour plusieurs villes. Elle inclut des fonctionnalités telles que le support du mode sombre et clair, plusieurs langues, et de nombreuses options de configuration et de gestion.
 
-![Weather App](assets/animations/ezgif-5-90a61133fd.gif)
+![Weather App](assets/animations/app_mockup.gif)
 ## Fonctionnalités
 
 ### Mode d'affichage
