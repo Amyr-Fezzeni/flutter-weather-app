@@ -51,7 +51,7 @@ class DaysForecastWidget extends StatelessWidget {
         Row(
           children: [
             ConstrainedBox(
-                constraints: const BoxConstraints(minWidth: 100),
+                constraints: BoxConstraints(minWidth: 100.sp),
                 child: Txt(data['dayName'], color: Colors.white, size: 14.sp)),
             const Spacer(),
             Image.asset(getAssetIcon(getDayIcon(data['icons'])),

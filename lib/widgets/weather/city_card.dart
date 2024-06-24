@@ -34,7 +34,6 @@ class _CityCardState extends State<CityCard> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 110.sp,
-      // width: context.w - 40,
       child: Stack(
         children: [
           Positioned(
@@ -45,7 +44,6 @@ class _CityCardState extends State<CityCard> {
               height: 80.sp,
               width: context.w,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              // margin: const EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
                   color: context.bgcolor,
                   borderRadius: defaultSmallRadius,
@@ -103,22 +101,6 @@ class _CityCardState extends State<CityCard> {
                       ],
                     ),
                     const Spacer(),
-                    // Column(
-                    //   mainAxisAlignment: MainAxisAlignment.end,
-                    //   children: [
-                    //     // Image.asset(
-                    //     //     getAssetIcon(widget
-                    //     //         .weatherData.list.first.weather.first.icon),
-                    //     //     height: 40,
-                    //     //     width: 40),
-                    //     Txt(
-                    //         getTemperature(
-                    //             widget.weatherData.list.first.main.temp),
-                    //         color: Colors.white,
-                    //         bold: true,
-                    //         size: 20.sp),
-                    //   ],
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Txt(

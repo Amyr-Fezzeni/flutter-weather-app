@@ -59,7 +59,6 @@ Widget settingsPopup(
               initialValue: selectedValue,
               surfaceTintColor: context.bgcolor,
               color: context.bgcolor,
-              padding: const EdgeInsets.only(left: 200),
               child: Row(
                 children: [
                   ConstrainedBox(
@@ -68,7 +67,7 @@ Widget settingsPopup(
                         color: context.iconColor, maxLines: 2),
                   ),
                   Icon(Icons.unfold_more_rounded,
-                      color: context.iconColor, size: 25)
+                      color: context.iconColor, size: 25.sp)
                 ],
               ),
               itemBuilder: (BuildContext context) => lst
@@ -83,10 +82,8 @@ Widget settingsPopup(
                         child: Container(
                           color: context.appThemeRead.bgColor,
                           child: Container(
-                              // height: 48,
-                              // width: double.maxFinite,
-                              constraints: const BoxConstraints(
-                                  minHeight: 50, minWidth: 110),
+                              constraints: BoxConstraints(
+                                  minHeight: 50.sp, minWidth: 110.sp),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               decoration: BoxDecoration(
@@ -134,13 +131,12 @@ Widget darkModePopup() {
               initialValue: context.appThemeWatch.appTheme,
               surfaceTintColor: context.bgcolor,
               color: context.bgcolor,
-              padding: const EdgeInsets.only(left: 200),
               child: Row(
                 children: [
                   Txt(capitalize(context.appThemeWatch.appTheme.name),
                       color: context.iconColor),
                   Icon(Icons.unfold_more_rounded,
-                      color: context.iconColor, size: 25)
+                      color: context.iconColor, size: 25.sp)
                 ],
               ),
               itemBuilder: (BuildContext context) => AppThemeModel.values
@@ -151,7 +147,8 @@ Widget darkModePopup() {
                         child: Container(
                           color: context.appThemeRead.bgColor,
                           child: Container(
-                              height: 48,
+                              constraints: BoxConstraints(
+                                  minHeight: 50.sp, minWidth: 110.sp),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               decoration: BoxDecoration(
@@ -200,13 +197,12 @@ Widget languagePopup() {
               initialValue: context.dataWatch.currentLanguage,
               surfaceTintColor: context.bgcolor,
               color: context.bgcolor,
-              padding: const EdgeInsets.only(left: 200),
               child: Row(
                 children: [
                   Txt(capitalize(context.dataWatch.currentLanguage.name),
                       color: context.iconColor),
                   Icon(Icons.unfold_more_rounded,
-                      color: context.iconColor, size: 25)
+                      color: context.iconColor, size: 25.sp)
                 ],
               ),
               itemBuilder: (BuildContext context) => LanguageModel.values
@@ -217,7 +213,8 @@ Widget languagePopup() {
                         child: Container(
                           color: context.appThemeRead.bgColor,
                           child: Container(
-                              height: 48,
+                              constraints: BoxConstraints(
+                                  minHeight: 50.sp, minWidth: 110.sp),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               decoration: BoxDecoration(

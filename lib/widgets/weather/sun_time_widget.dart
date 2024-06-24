@@ -24,14 +24,16 @@ class SunTimeWidget extends StatelessWidget {
             children: [
               Txt(data['title'] as String,
                   color: Colors.white60, bold: true, size: 14.sp),
-              Txt(data['date'] as String, color: Colors.white60, bold: true,translate: false),
+              Txt(data['date'] as String,
+                  color: Colors.white60, bold: true, translate: false,
+                size: 14.sp),
               const Spacer(
                 flex: 2,
               ),
               Center(
                   child: Image.asset(
                       data['title'] == "Sunset" ? sunset : sunrise,
-                      height: 80,
+                      height: 80.sp,
                       fit: BoxFit.contain)),
               const Spacer(),
             ],

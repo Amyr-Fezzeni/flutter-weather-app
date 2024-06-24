@@ -15,17 +15,24 @@ import 'package:weather_app/views/home/home.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // Preserving the splash screen until initialization completes
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  // Setting system UI mode and preferred orientation
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  // Loading environment variables from .env file
   await dotenv.load(fileName: ".env");
+
+  // Initializing local data storage
   await LocalData.init();
 
+  // Removing the splash screen once initialization is done
   FlutterNativeSplash.remove();
 
+  // Running the application with multi providers
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => AppThemeProvider()),

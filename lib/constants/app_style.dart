@@ -33,40 +33,6 @@ const palette = [
   Color.fromRGBO(238, 238, 238, 1)
 ];
 
-LinearGradient getGradient(String condition) {
-  switch (condition) {
-    case 'Clear':
-      return const LinearGradient(
-        colors: [Colors.blue, Colors.lightBlueAccent],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      );
-    case 'Clouds':
-      return const LinearGradient(
-        colors: [Colors.grey, Colors.blueGrey],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      );
-    case 'Rain':
-      return const LinearGradient(
-        colors: [Colors.blueGrey, Colors.black],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      );
-    case 'Snow':
-      return const LinearGradient(
-        colors: [Colors.white, Colors.lightBlueAccent],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      );
-    default:
-      return const LinearGradient(
-        colors: [Colors.blue, Colors.lightBlueAccent],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      );
-  }
-}
 
 // Extra settings
 const double smallRadius = 8;

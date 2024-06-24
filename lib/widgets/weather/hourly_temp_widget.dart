@@ -22,7 +22,7 @@ class HourlyTemperatureWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Txt("24-hour forecast",
+            Txt("Hourly forecast",
                 color: Colors.white60, bold: true, size: 14.sp),
             const Gap(10),
             SingleChildScrollView(

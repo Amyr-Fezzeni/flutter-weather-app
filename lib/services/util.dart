@@ -1,21 +1,30 @@
 import 'package:weather_app/constants/background_data.dart';
 
+/// Capitalise la première lettre d'une chaîne de caractères et met le reste en minuscules.
+///
+/// Retourne une chaîne vide si [text] est nul ou vide.
 String capitalize(String? text) {
   if (text == null || text.isEmpty) return '';
   return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
 }
 
-// String getIconUrl(String icon) =>
-//     "https://openweathermap.org/img/wn/$icon@2x.png";
-
+/// Renvoie le chemin d'accès à l'icône météo dans les ressources.
+///
+/// Utilise [icon] pour construire le chemin d'accès à l'icône dans le dossier 'assets/weather icons'.
 String getAssetIcon(String icon) => "assets/weather icons/$icon.png";
+
+/// Calcule la moyenne des nombres dans [numbers].
+///
+/// Renvoie 0 si [numbers] est vide.
 int getAverageNumber(List<int> numbers) {
   if (numbers.isEmpty) return 0;
-
   int sum = numbers.reduce((a, b) => a + b);
   return sum ~/ numbers.length;
 }
 
+/// Renvoie les détails de la date sous forme de map pour une [date] donnée.
+///
+/// Le jour est étiqueté comme 'Today', 'Tomorrow' ou le nom du jour de la semaine.
 Map<String, dynamic> getDateDetails(DateTime date) {
   List<String> dayNames = [
     'Sunday',
@@ -50,37 +59,18 @@ Map<String, dynamic> getDateDetails(DateTime date) {
   };
 }
 
+/// Renvoie la vitesse moyenne du vent à partir d'une liste de données de vent [windList].
+///
+/// Renvoie un map vide si [windList] est vide.
 Map<String, dynamic> getAverageWindSpeed(List<Map<String, dynamic>> windList) {
   if (windList.isEmpty) return {};
   windList.sort((a, b) => (a['speed'] as double).compareTo(b['speed']));
   return windList[(windList.length / 2).floor()];
 }
 
-String weatherIcon(String description) {
-  switch (description) {
-    case 'clear sky':
-      return "";
-    case 'few clouds':
-      return "";
-    case 'scattered clouds':
-      return "";
-    case 'broken clouds':
-      return "";
-    case 'shower rain':
-      return "";
-    case 'rain':
-      return "";
-    case 'thunderstorm':
-      return "";
-    case 'snow':
-      return "";
-    case 'mist':
-      return "";
-    default:
-      return '';
-  }
-}
-
+/// Renvoie l'arrière-plan météo correspondant à [main] et [isDay].
+///
+/// Utilise les constantes d'arrière-plan définies pour différents types de conditions météorologiques.
 String weatherBackgroung(String main, bool isDay) {
   switch (main) {
     case 'Clear':
@@ -94,6 +84,9 @@ String weatherBackgroung(String main, bool isDay) {
   }
 }
 
+/// Renvoie l'arrière-plan de la carte météo correspondant à [main] et [isDay].
+///
+/// Utilise les constantes d'arrière-plan de carte définies pour différents types de conditions météorologiques.
 String weatherBackgroungCard(String main, bool isDay) {
   switch (main) {
     case 'Clear':

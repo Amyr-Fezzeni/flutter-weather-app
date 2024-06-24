@@ -45,7 +45,7 @@ class _ManageCitiesState extends State<ManageCities> {
                       ),
                     Container(
                       width: double.maxFinite,
-                      height: 50,
+                      height: 50.sp,
                       decoration: BoxDecoration(
                           color: context.invertedColor.withOpacity(.05),
                           borderRadius: defaultBigRadius),
@@ -55,11 +55,11 @@ class _ManageCitiesState extends State<ManageCities> {
                         child: Row(
                           children: [
                             Icon(Icons.search_rounded,
-                                color: context.iconColor),
+                                color: context.iconColor, size: 25.sp),
                             const Gap(10),
                             Txt('Enter Location',
                                 color: context.invertedColor.withOpacity(0.4),
-                                size: 14)
+                                size: 14.sp)
                           ],
                         ),
                       ),
@@ -72,7 +72,6 @@ class _ManageCitiesState extends State<ManageCities> {
                           canBeDeleted: false,
                           index: 0),
                     SizedBox(
-                      // color: Colors.red,
                       height: context.dataWatch.cityList.length * 110.sp,
                       child: ReorderableListView(
                           physics: const NeverScrollableScrollPhysics(),

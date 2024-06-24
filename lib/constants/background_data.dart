@@ -1,3 +1,5 @@
+// weather details background images
+
 const clearDay = "assets/background/clear.jpg";
 const clearNight = "assets/background/clearnight.jpg";
 
@@ -7,7 +9,7 @@ const cloudsDay = "assets/background/clouds.jpg";
 const fewCloudsDay = "assets/background/few clouds day.jpg";
 const fewCloudsNight = "assets/background/few clouds night.jpg";
 
-// for city cards
+// city cards images
 
 const clearDayCard = "assets/background/clear day card.jpg";
 const clearNightCard = "assets/background/clear night card.jpg";

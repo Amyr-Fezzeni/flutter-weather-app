@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/constants/icons_data.dart';
 import 'package:weather_app/models/weather%20model/wind.dart';
@@ -23,13 +24,17 @@ class WindWidget extends StatelessWidget {
           children: [
             Txt("Wind", color: Colors.white60, bold: true, size: 14.sp),
             Txt(getWindSpeed(wind.speed),
-                color: Colors.white60, bold: true, translate: false),
-            const Spacer(),
+                color: Colors.white60,
+                bold: true,
+                translate: false,
+                size: 14.sp),
+            const Spacer(flex: 2),
             Align(
               alignment: Alignment.centerRight,
               child: Container(
-                  height: 90.sp,
-                  width: 90.sp,
+                  height: 85.sp,
+                  width: 85.sp,
+                  margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.white12, width: 2),
                       borderRadius: BorderRadius.circular(100),
@@ -41,10 +46,11 @@ class WindWidget extends StatelessWidget {
                       child: Transform.rotate(
                           angle: wind.deg * pi / 180,
                           child: Image.asset(compas,
-                              height: 70.sp, fit: BoxFit.contain)),
+                              height: 60.sp, fit: BoxFit.contain)),
                     ),
                   )),
             ),
+            const Spacer(),
           ],
         ),
       )),

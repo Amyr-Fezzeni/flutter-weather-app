@@ -7,6 +7,10 @@ import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/navigation_service.dart';
 import 'package:weather_app/services/util.dart';
 
+/// Filtrer les données météorologiques des 24 prochaines 3 heures à partir de la liste [weatherList].
+///
+/// Renvoie une liste de maps contenant les détails météorologiques par heure, y compris
+/// l'heure, la direction du vent, la température, la vitesse du vent et l'icône météo.
 List<Map<String, dynamic>> filterNext24Hour(List<WeatherList> weatherList) {
   List<Map<String, dynamic>> hourlyTemps = [];
 
@@ -24,6 +28,11 @@ List<Map<String, dynamic>> filterNext24Hour(List<WeatherList> weatherList) {
   return hourlyTemps;
 }
 
+/// Obtenir les données météorologiques des 5 prochains jours à partir de la liste [weatherList].
+///
+/// Renvoie une liste de maps contenant les détails météorologiques par jour, y compris
+/// la date, le nom du jour, la température maximale et minimale, la vitesse moyenne du vent,
+/// l'humidité, la pression atmosphérique et les icônes météo.
 List<Map<String, dynamic>> get5DaysData(List<WeatherList> weatherList) {
   Map<String, Map<String, dynamic>> hourlyTemps = {};
 
@@ -77,6 +86,10 @@ List<Map<String, dynamic>> get5DaysData(List<WeatherList> weatherList) {
   return hourlyTemps.values.toList();
 }
 
+/// Obtient les températures maximales et minimales quotidiennes à partir de la liste [weatherList].
+///
+/// Renvoie une liste de maps contenant les détails des températures maximales et minimales par jour,
+/// ainsi que les icônes météo correspondantes.
 List<Map<String, dynamic>> getDailyMaxMinTemperatures(
     List<WeatherList> weatherList) {
   Map<String, Map<String, dynamic>> dailyTemps = {};
@@ -105,6 +118,9 @@ List<Map<String, dynamic>> getDailyMaxMinTemperatures(
   return dailyTemps.values.toList();
 }
 
+/// Obtient l'heure du coucher ou du lever du soleil pour la ville donnée [city].
+///
+/// Utilise les données de lever et de coucher du soleil ajustées au fuseau horaire de la ville.
 Map<String, String> getSunsetSunriseTime(City city) {
   final sunset = getTimeZone(time: city.sunset, timezone: city.timezone);
   final sunrise = getTimeZone(time: city.sunrise, timezone: city.timezone);
@@ -115,6 +131,9 @@ Map<String, String> getSunsetSunriseTime(City city) {
   return {"title": "Sunrise", "date": DateFormat('HH:mm').format(sunrise)};
 }
 
+/// Vérifie s'il fait jour pour la ville donnée [city] à l'heure actuelle.
+///
+/// Compare l'heure actuelle avec les heures de lever et de coucher du soleil ajustées au fuseau horaire de la ville.
 bool isDay(City city) {
   final currentTime = getTimeZoneCityDate(city.timezone);
   final sunset = getTimeZone(time: city.sunset, timezone: city.timezone);
@@ -122,20 +141,28 @@ bool isDay(City city) {
   return currentTime.isAfter(sunrise) && currentTime.isBefore(sunset);
 }
 
+/// Obtient l'heure actuelle ajustée au fuseau horaire de la ville [city].
 String getTimeZoneCityString(City city) {
   DateTime timeInCity =
       DateTime.now().toUtc().add(Duration(seconds: city.timezone));
   return DateFormat('HH:mm').format(timeInCity);
 }
 
+/// Obtient la date actuelle ajustée au fuseau horaire de la ville [timezone].
 DateTime getTimeZoneCityDate(int timezone) {
   return DateTime.now().toUtc().add(Duration(seconds: timezone));
 }
 
+/// Obtient l'heure ajustée au fuseau horaire donné [timezone].
 DateTime getTimeZone({required DateTime time, required int timezone}) {
   return time.add(Duration(seconds: timezone));
 }
 
+/// Convertit la pression atmosphérique en unité spécifiée dans le contexte actuel.
+///
+/// Utilise l'unité de pression atmosphérique actuellement sélectionnée dans l'application
+/// pour convertir la pression donnée en hectopascals (hPa) en pouces de mercure (inHg)
+/// ou en atmosphères (atm) avant de renvoyer la valeur formatée.
 String getPressure(double pressure) {
   BuildContext context = NavigationService.navigatorKey.currentContext!;
   const double hpaToInHg = 0.02953;
@@ -152,10 +179,16 @@ String getPressure(double pressure) {
   return '${pressure.round()} ${context.dataWatch.atmospherePressureUnit.code}';
 }
 
+/// Obtient la visibilité en kilomètres à partir des données météorologiques [weather].
 String getVisibility(WeatherList weather) {
   return '${weather.visibility ~/ 1000} Km';
 }
 
+/// Convertit la température en unité spécifiée dans le contexte actuel.
+///
+/// Utilise l'unité de température actuellement sélectionnée dans l'application
+/// pour convertir la température donnée de kelvin (K) en degrés Celsius (°C) ou Fahrenheit (°F)
+/// avant de renvoyer la valeur formatée.
 String getTemperature(double? temp) {
   if (temp == null) return "";
   BuildContext context = NavigationService.navigatorKey.currentContext!;
@@ -166,19 +199,31 @@ String getTemperature(double? temp) {
   return "${(calculatedTemp).toInt()}°"; //${context.dataWatch.temperatureUnit.name}
 }
 
+/// Obtient la vitesse du vent en kilomètres par heure (km/h) à partir de la vitesse du vent donnée.
+///
+/// Utilise l'unité de vitesse du vent actuellement sélectionnée dans l'application pour
+/// convertir la vitesse du vent de mètres par seconde (m/s) en kilomètres par heure (km/h)
+/// avant de renvoyer la valeur formatée.
 String getWindSpeed(double windSpeed) {
   BuildContext context = NavigationService.navigatorKey.currentContext!;
   return '${(windSpeed * 3.6).round()} ${context.dataWatch.windSpeedUnit.code}';
 }
 
+/// Obtient l'humidité en pourcentage (%) à partir des données météorologiques principales [main].
 String getHumidity(MainWeather main) {
   return '${main.humidity} %';
 }
 
+/// Obtient la sensation thermique à partir des données météorologiques principales [main].
+///
+/// Renvoie la température ressentie en utilisant la fonction `getTemperature`.
 String getRealFeel(MainWeather main) {
   return getTemperature(main.feelsLike);
 }
 
+/// Obtient l'icône météo dominante à partir de la liste des icônes météo [icons].
+///
+/// Détermine l'icône météo la plus fréquemment présente dans la liste et la renvoie.
 String getDayIcon(List<String> icons) {
   Map<String, int> frequencyMap = {};
 

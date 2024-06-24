@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/services/context_extention.dart';
-
-Widget cLoader({double size = 50}) {
-  return SizedBox(
-    height: size,
-    width: size,
-    child: const Center(child: CircularProgressIndicator()),
-  );
-}
 
 Widget divider({double bottom = 0, double top = 0}) =>
     Builder(builder: (context) {
@@ -25,8 +18,8 @@ Widget checkBox({required bool value, required Function() function}) =>
       return Padding(
         padding: const EdgeInsets.only(left: 10),
         child: SizedBox(
-          height: 20,
-          width: 20,
+          height: 20.sp,
+          width: 20.sp,
           child: Checkbox(
             value: value,
             checkColor: Colors.white,

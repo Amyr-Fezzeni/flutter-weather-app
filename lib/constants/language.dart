@@ -10,9 +10,9 @@ const Map<String, Map<String, String>> languageData = {
   "H": {"english": "H", "french": "H"},
   "L": {"english": "L", "french": "L"},
   "Forecast": {"english": "Forecast", "french": "Prévisions"},
-  "24-hour forecast": {
-    "english": "24-hour forecast",
-    "french": "Prévisions sur 24 heures"
+  "Hourly forecast": {
+    "english": "Hourly forecast",
+    "french": "Prévision horaire"
   },
   "Wind": {"english": "Wind", "french": "Vent"},
   "Humidity": {"english": "Humidity", "french": "Humidité"},

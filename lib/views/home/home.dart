@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/language.dart';
 import 'package:weather_app/views/city/manage_cities.dart';
@@ -43,13 +44,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         actions: [
           IconButton(
             onPressed: () => context.moveTo(const ManageCities()),
-            icon: const Icon(Icons.add, color: Colors.white, size: 25),
+            icon: Icon(Icons.add, color: Colors.white, size: 25.sp),
             tooltip: txt('Add city'),
           ),
           IconButton(
             onPressed: () => context.moveTo(const Settings()),
-            icon: const Icon(Icons.more_vert_rounded,
-                color: Colors.white, size: 25),
+            icon:
+                Icon(Icons.more_vert_rounded, color: Colors.white, size: 25.sp),
             tooltip: txt('Settings'),
           )
         ],

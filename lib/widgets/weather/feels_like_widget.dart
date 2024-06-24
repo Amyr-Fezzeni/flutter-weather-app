@@ -21,7 +21,8 @@ class FeelsLikeWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Txt("Real feel", color: Colors.white60, bold: true, size: 14.sp),
-            Txt(getRealFeel(main), color: Colors.white60, bold: true,translate: false),
+            Txt(getRealFeel(main), color: Colors.white60, bold: true,translate: false,
+                size: 14.sp),
             const Spacer(
               flex: 2,
             ),

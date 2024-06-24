@@ -1,0 +1,161 @@
+{
+  "weather_icons": [
+    {
+      "main": "Clear",
+      "icons": [
+        { "description": "clear sky (day)", "icon": "01d" },
+        { "description": "clear sky (night)", "icon": "01n" }
+      ]
+    },
+    {
+      "main": "Clouds",
+      "icons": [
+        { "description": "few clouds (day)", "icon": "02d" },
+        { "description": "few clouds (night)", "icon": "02n" },
+        { "description": "scattered clouds (day)", "icon": "03d" },
+        { "description": "scattered clouds (night)", "icon": "03n" },
+        { "description": "broken clouds (day)", "icon": "04d" },
+        { "description": "broken clouds (night)", "icon": "04n" },
+        { "description": "overcast clouds (day)", "icon": "04d" },
+        { "description": "overcast clouds (night)", "icon": "04n" }
+      ]
+    },
+    {
+      "main": "Rain",
+      "icons": [
+        { "description": "light rain (day)", "icon": "10d" },
+        { "description": "light rain (night)", "icon": "10n" },
+        { "description": "moderate rain (day)", "icon": "10d" },
+        { "description": "moderate rain (night)", "icon": "10n" },
+        { "description": "heavy intensity rain (day)", "icon": "10d" },
+        { "description": "heavy intensity rain (night)", "icon": "10n" },
+        { "description": "very heavy rain (day)", "icon": "10d" },
+        { "description": "very heavy rain (night)", "icon": "10n" },
+        { "description": "extreme rain (day)", "icon": "10d" },
+        { "description": "extreme rain (night)", "icon": "10n" },
+        { "description": "freezing rain (day)", "icon": "13d" },
+        { "description": "freezing rain (night)", "icon": "13n" },
+        { "description": "light intensity shower rain (day)", "icon": "09d" },
+        { "description": "light intensity shower rain (night)", "icon": "09n" },
+        { "description": "shower rain (day)", "icon": "09d" },
+        { "description": "shower rain (night)", "icon": "09n" },
+        { "description": "heavy intensity shower rain (day)", "icon": "09d" },
+        { "description": "heavy intensity shower rain (night)", "icon": "09n" },
+        { "description": "ragged shower rain (day)", "icon": "09d" },
+        { "description": "ragged shower rain (night)", "icon": "09n" }
+      ]
+    },
+    {
+      "main": "Drizzle",
+      "icons": [
+        { "description": "light intensity drizzle (day)", "icon": "09d" },
+        { "description": "light intensity drizzle (night)", "icon": "09n" },
+        { "description": "drizzle (day)", "icon": "09d" },
+        { "description": "drizzle (night)", "icon": "09n" },
+        { "description": "heavy intensity drizzle (day)", "icon": "09d" },
+        { "description": "heavy intensity drizzle (night)", "icon": "09n" },
+        { "description": "light intensity drizzle rain (day)", "icon": "09d" },
+        { "description": "light intensity drizzle rain (night)", "icon": "09n" },
+        { "description": "drizzle rain (day)", "icon": "09d" },
+        { "description": "drizzle rain (night)", "icon": "09n" },
+        { "description": "heavy intensity drizzle rain (day)", "icon": "09d" },
+        { "description": "heavy intensity drizzle rain (night)", "icon": "09n" },
+        { "description": "shower rain and drizzle (day)", "icon": "09d" },
+        { "description": "shower rain and drizzle (night)", "icon": "09n" },
+        { "description": "heavy shower rain and drizzle (day)", "icon": "09d" },
+        { "description": "heavy shower rain and drizzle (night)", "icon": "09n" },
+        { "description": "shower drizzle (day)", "icon": "09d" },
+        { "description": "shower drizzle (night)", "icon": "09n" }
+      ]
+    },
+    {
+      "main": "Thunderstorm",
+      "icons": [
+        { "description": "thunderstorm with light rain (day)", "icon": "11d" },
+        { "description": "thunderstorm with light rain (night)", "icon": "11n" },
+        { "description": "thunderstorm with rain (day)", "icon": "11d" },
+        { "description": "thunderstorm with rain (night)", "icon": "11n" },
+        { "description": "thunderstorm with heavy rain (day)", "icon": "11d" },
+        { "description": "thunderstorm with heavy rain (night)", "icon": "11n" },
+        { "description": "light thunderstorm (day)", "icon": "11d" },
+        { "description": "light thunderstorm (night)", "icon": "11n" },
+        { "description": "thunderstorm (day)", "icon": "11d" },
+        { "description": "thunderstorm (night)", "icon": "11n" },
+        { "description": "heavy thunderstorm (day)", "icon": "11d" },
+        { "description": "heavy thunderstorm (night)", "icon": "11n" },
+        { "description": "ragged thunderstorm (day)", "icon": "11d" },
+        { "description": "ragged thunderstorm (night)", "icon": "11n" },
+        { "description": "thunderstorm with light drizzle (day)", "icon": "11d" },
+        { "description": "thunderstorm with light drizzle (night)", "icon": "11n" },
+        { "description": "thunderstorm with drizzle (day)", "icon": "11d" },
+        { "description": "thunderstorm with drizzle (night)", "icon": "11n" },
+        { "description": "thunderstorm with heavy drizzle (day)", "icon": "11d" },
+        { "description": "thunderstorm with heavy drizzle (night)", "icon": "11n" }
+      ]
+    },
+    {
+      "main": "Snow",
+      "icons": [
+        { "description": "light snow (day)", "icon": "13d" },
+        { "description": "light snow (night)", "icon": "13n" },
+        { "description": "snow (day)", "icon": "13d" },
+        { "description": "snow (night)", "icon": "13n" },
+        { "description": "heavy snow (day)", "icon": "13d" },
+        { "description": "heavy snow (night)", "icon": "13n" },
+        { "description": "sleet (day)", "icon": "13d" },
+        { "description": "sleet (night)", "icon": "13n" },
+        { "description": "light shower sleet (day)", "icon": "13d" },
+        { "description": "light shower sleet (night)", "icon": "13n" },
+        { "description": "shower sleet (day)", "icon": "13d" },
+        { "description": "shower sleet (night)", "icon": "13n" },
+        { "description": "light rain and snow (day)", "icon": "13d" },
+        { "description": "light rain and snow (night)", "icon": "13n" },
+        { "description": "rain and snow (day)", "icon": "13d" },
+        { "description": "rain and snow (night)", "icon": "13n" },
+        { "description": "light shower snow (day)", "icon": "13d" },
+        { "description": "light shower snow (night)", "icon": "13n" },
+        { "description": "shower snow (day)", "icon": "13d" },
+        { "description": "shower snow (night)", "icon": "13n" },
+        { "description": "heavy shower snow (day)", "icon": "13d" },
+        { "description": "heavy shower snow (night)", "icon": "13n" }
+      ]
+    },
+    {
+      "main": "Atmosphere",
+      "icons": [
+        { "description": "mist (day)", "icon": "50d" },
+        { "description": "mist (night)", "icon": "50n" },
+        { "description": "smoke (day)", "icon": "50d" },
+        { "description": "smoke (night)", "icon": "50n" },
+        { "description": "haze (day)", "icon": "50d" },
+        { "description": "haze (night)", "icon": "50n" },
+        { "description": "sand/ dust whirls (day)", "icon": "50d" },
+        { "description": "sand/ dust whirls (night)", "icon": "50n" },
+        { "description": "fog (day)", "icon": "50d" },
+        { "description": "fog (night)", "icon": "50n" },
+        { "description": "sand (day)", "icon": "50d" },
+        { "description": "sand (night)", "icon": "50n" },
+        { "description": "dust (day)", "icon": "50d" },
+        { "description": "dust (night)", "icon": "50n" },
+        { "description": "volcanic ash (day)", "icon": "50d" },
+        { "description": "volcanic ash (night)", "icon": "50n" },
+        { "description": "squalls (day)", "icon": "50d" },
+        { "description": "squalls (night)", "icon": "50n" },
+        { "description": "tornado (day)", "icon": "50d" },
+        { "description": "tornado (night)", "icon": "50n" }
+      ]
+    },
+    {
+      "main": "Extreme",
+      "icons": [
+        { "description": "tornado", "icon": "50d" },
+        { "description": "tropical storm", "icon": "50d" },
+        { "description": "hurricane", "icon": "50d" },
+        { "description": "cold", "icon": "50d" },
+        { "description": "hot", "icon": "50d" },
+        { "description": "windy", "icon": "50d" },
+        { "description": "hail", "icon": "50d" }
+      ]
+    }
+  ]
+}

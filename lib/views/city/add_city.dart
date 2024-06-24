@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/constants/app_style.dart';
-import 'package:weather_app/models/city.dart';
+import 'package:weather_app/models/city_info.dart';
 import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/language.dart';
 
@@ -32,6 +32,7 @@ class _AddCityState extends State<AddCity> {
         minChildSize: .5,
         builder: (context, scrollController) => Container(
               color: context.bgcolor,
+              width: context.w,
               child: SafeArea(
                 child: Padding(
                   padding: EdgeInsets.only(top: 40.sp),
@@ -43,54 +44,62 @@ class _AddCityState extends State<AddCity> {
                           children: [
                             Expanded(
                               child: SizedBox(
-                                height: 50,
-                                child: TextFormField(
-                                  autofocus: true,
-                                  onFieldSubmitted: (val) => focus.unfocus(),
-                                  onChanged: (value) {
-                                    if (value.toString().trim().length < 2) {
-                                      return;
-                                    }
+                                height: 40.sp,
+                                child: Center(
+                                  child: TextFormField(
+                                    autofocus: true,
+                                    onFieldSubmitted: (val) => focus.unfocus(),
+                                    onChanged: (value) {
+                                      if (value.toString().trim().length < 2) {
+                                        return;
+                                      }
 
-                                    context.dataRead
-                                        .getListCities(controller.text.trim())
-                                        .then((value) => setState(() {
-                                              locationsData = value;
-                                              firstSearch = true;
-                                            }));
-                                  },
-                                  controller: controller,
-                                  autocorrect: true,
-                                  style: context.text,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor:
-                                        context.invertedColor.withOpacity(0.05),
-                                    hintText: txt("Enter Location"),
-                                    suffixIcon: controller.text.isEmpty
-                                        ? null
-                                        : InkWell(
-                                            onTap: () => setState(
-                                                () => controller.clear()),
-                                            child: Icon(Icons.close,
-                                                color: context.iconColor),
-                                          ),
-                                    prefixIcon: Container(
-                                        width: 30,
-                                        height: 30,
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 5),
-                                        child: Icon(Icons.search_rounded,
-                                            color: context.iconColor)),
-                                    hintStyle: context.text.copyWith(
-                                        color: context.invertedColor
-                                            .withOpacity(0.4),
-                                        fontSize: 14.sp),
-                                    contentPadding:
-                                        const EdgeInsets.only(left: 15),
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: defaultBigRadius,
+                                      context.dataRead
+                                          .getListCities(controller.text.trim())
+                                          .then((value) => setState(() {
+                                                locationsData = value;
+                                                firstSearch = true;
+                                              }));
+                                    },
+                                    controller: controller,
+                                    autocorrect: true,
+                                    style: context.text,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: context.invertedColor
+                                          .withOpacity(0.05),
+                                      hintText: txt("Enter Location"),
+                                      suffixIcon: controller.text.isEmpty
+                                          ? null
+                                          : InkWell(
+                                              onTap: () => setState(
+                                                  () => controller.clear()),
+                                              child: Icon(
+                                                Icons.close,
+                                                color: context.iconColor,
+                                                size: 20.sp,
+                                              ),
+                                            ),
+                                      prefixIcon: Container(
+                                          width: 30.sp,
+                                          height: 30.sp,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5, vertical: 5),
+                                          child: Icon(
+                                            Icons.search_rounded,
+                                            color: context.iconColor,
+                                            size: 25.sp,
+                                          )),
+                                      hintStyle: context.text.copyWith(
+                                          color: context.invertedColor
+                                              .withOpacity(0.4),
+                                          fontSize: 14.sp),
+                                      contentPadding:
+                                          const EdgeInsets.only(left: 15),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: defaultBigRadius,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -99,8 +108,8 @@ class _AddCityState extends State<AddCity> {
                             const Gap(15),
                             InkWell(
                                 onTap: () => Navigator.pop(context),
-                                child:
-                                    Txt('Cancel', color: context.primaryColor)),
+                                child: Txt('Cancel',
+                                    color: context.primaryColor, size: 14.sp)),
                           ],
                         ),
                       ),

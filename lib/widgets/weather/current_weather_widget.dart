@@ -40,7 +40,7 @@ class CurrentWeatherWidget extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 5),
                             child: Icon(
                               icons[index],
-                              size: 10,
+                              size: 10.sp,
                               color: index == context.dataWatch.currentCityIndex
                                   ? Colors.white
                                   : Colors.white30,
@@ -56,7 +56,7 @@ class CurrentWeatherWidget extends StatelessWidget {
               String maxTemp = getTemperature(data.first['max']);
               String minTemp = getTemperature(data.first['min']);
               return Txt('${txt('H')}:$maxTemp ${txt('L')}:$minTemp',
-                  translate: false, color: Colors.white70);
+                  translate: false, color: Colors.white70, size: 14.sp);
             }),
           ],
         ),

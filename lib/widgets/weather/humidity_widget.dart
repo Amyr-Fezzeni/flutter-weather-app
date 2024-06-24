@@ -21,10 +21,10 @@ class HumidityWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Txt("Humidity", color: Colors.white60, bold: true, size: 14.sp),
-            Txt(getHumidity(main), color: Colors.white60, bold: true,translate: false),
-            const Spacer(
-              flex: 2,
-            ),
+            Txt(getHumidity(main),
+                color: Colors.white60, bold: true, translate: false,
+                size: 14.sp),
+            const Spacer(flex: 2),
             Container(
                 alignment: Alignment.centerRight,
                 margin: const EdgeInsets.only(right: 10),
