@@ -4,37 +4,32 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/models/city_info.dart';
 import 'package:weather_app/models/weather%20model/weather_model.dart';
-/// A class for making API calls to retrieve weather and city information.
+
+/// Une classe pour effectuer des appels API afin de récupérer des informations météorologiques et des informations sur les villes.
 ///
-/// Uses http package for network requests and json package for data parsing.
-/// Utilizes OpenWeatherMap API for weather and city data.
+/// Utilise le package http pour les requêtes réseau et le package json pour l'analyse des données.
+/// Utilise l'API OpenWeatherMap pour les données météorologiques et les données des villes.
 ///
-/// Dependencies:
-/// - flutter_dotenv: ^5.0.2
-/// - http: ^0.13.3
-/// - weather_app/models/city.dart
-/// - weather_app/models/weather_model/weather_model.dart
-///
-/// Example usage:
+/// Exemple d'utilisation:
 /// ```dart
 /// WeatherModel? weather = await ApiService.getForecastWeatherDataByCity(city: 'London', lang: 'en');
 /// List<CityInfo> cities = await ApiService.getListCities(query: 'New York');
 /// ```
 ///
-/// Note: Ensure to provide the correct API_KEY using dotenv.
+/// Remarque: Assurez-vous de fournir la bonne API_KEY en utilisant dotenv.
 class ApiService {
   static const apiUrl = "https://api.openweathermap.org";
 
-  /// Retrieves forecast weather data by geographical coordinates.
+  /// Récupère les données météorologiques prévues par coordonnées géographiques.
   static Future<WeatherModel?> getForecastWeatherDataByCordinate({
     required double lat,
     required double lon,
-    required String lang,
+    required String language,
   }) async {
     try {
       final http.Response request = await http.get(
         Uri.parse(
-            "$apiUrl/data/2.5/forecast?lat=$lat&lon=$lon&lang=$lang&appid=${dotenv.get('API_KEY')}"),
+            "$apiUrl/data/2.5/forecast?lat=$lat&lon=$lon&lang=$language&appid=${dotenv.get('API_KEY')}"),
         headers: {"content-type": "application/json"},
       );
       final body = json.decode(request.body);
@@ -47,16 +42,16 @@ class ApiService {
     return null;
   }
 
-  /// Retrieves forecast weather data by city name.
+  /// Récupère les données météorologiques prévues par nom de ville.
   static Future<WeatherModel?> getForecastWeatherDataByCity({
     required String city,
-    required String lang,
+    required String language,
     String? key
   }) async {
     try {
       final http.Response request = await http.get(
         Uri.parse(
-            "$apiUrl/data/2.5/forecast?q=$city&lang=$lang&appid=${key??dotenv.get('API_KEY')}"),
+            "$apiUrl/data/2.5/forecast?q=$city&lang=$language&appid=${key??dotenv.get('API_KEY')}"),
         headers: {"content-type": "application/json"},
       );
       final body = json.decode(request.body);
@@ -69,7 +64,7 @@ class ApiService {
     return null;
   }
 
-  /// Retrieves a list of cities matching the given query.
+  /// Récupère une liste de villes correspondant à la requête donnée.
   static Future<List<CityInfo>> getListCities({required String query}) async {
     List<CityInfo> cities = [];
     try {

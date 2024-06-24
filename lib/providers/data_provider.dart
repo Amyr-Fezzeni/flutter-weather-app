@@ -157,12 +157,12 @@ class DataProvider with ChangeNotifier {
       cityData = await ApiService.getForecastWeatherDataByCordinate(
         lat: city.lat!,
         lon: city.lon!,
-        lang: currentLanguage.name.substring(0, 2),
+        language: currentLanguage.name.substring(0, 2),
       );
     } else if (req.isNotEmpty) {
       cityData = await ApiService.getForecastWeatherDataByCity(
         city: "${city.name}, ${city.state}, ${city.country}",
-        lang: currentLanguage.name.substring(0, 2),
+        language: currentLanguage.name.substring(0, 2),
       );
     }
 
@@ -220,7 +220,7 @@ class DataProvider with ChangeNotifier {
       final cityData = await ApiService.getForecastWeatherDataByCordinate(
           lat: mainCity!.city.coord.lat,
           lon: mainCity!.city.coord.lon,
-          lang: currentLanguage.name.substring(0, 2));
+          language: currentLanguage.name.substring(0, 2));
       if (cityData != null) {
         mainCity = cityData;
         LocalData.saveWeatherData(cityData, isMain: true);
@@ -233,7 +233,7 @@ class DataProvider with ChangeNotifier {
       final cityData = await ApiService.getForecastWeatherDataByCordinate(
           lat: city.city.coord.lat,
           lon: city.city.coord.lon,
-          lang: currentLanguage.name.substring(0, 2));
+          language: currentLanguage.name.substring(0, 2));
       if (cityData == null) continue;
       newCitiesData.add(cityData);
     }
@@ -253,7 +253,7 @@ class DataProvider with ChangeNotifier {
     WeatherModel? cityData = await ApiService.getForecastWeatherDataByCordinate(
         lat: data.latitude,
         lon: data.longitude,
-        lang: currentLanguage.name.substring(0, 2));
+        language: currentLanguage.name.substring(0, 2));
     if (cityData == null) return;
 
     LocalData.saveWeatherData(cityData, isMain: true);

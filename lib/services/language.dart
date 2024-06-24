@@ -7,39 +7,39 @@ import 'package:weather_app/services/context_extention.dart';
 import 'package:weather_app/services/local_data.dart';
 import 'navigation_service.dart';
 
-/// Returns the translated string for a given key based on the current app language.
+/// Renvoie la chaîne traduite pour une clé donnée en fonction de la langue actuelle de l'application.
 String txt(String key) {
-  // Retrieve the current language of the app.
+  // Récupère la langue actuelle de l'application.
   LanguageModel language = LocalData.getAppLanguage();
-  // Return the translated string for the key if available; otherwise, return the key itself.
+  // Renvoie la chaîne traduite pour la clé si disponible; sinon, renvoie la clé elle-même.
   return languageData[key]?[language.name] ?? key;
 }
 
-/// A widget that displays text with various style options and translation support.
+/// Un widget qui affiche du texte avec diverses options de style et support de traduction.
 Widget Txt(
   String text, {
-  Color? color,            // Optional color for the text.
-  double? size,            // Optional font size for the text.
-  bool center = false,     // Optional flag to center the text.
-  TextStyle? style,        // Optional custom text style.
-  String extra = '',       // Optional extra text to append.
-  int? maxLines,           // Optional maximum number of lines for the text.
-  bool translate = true,   // Optional flag to enable/disable translation.
-  bool bold = false,       // Optional flag to make the text bold.
+  Color? color,            // Couleur optionnelle pour le texte.
+  double? size,            // Taille de police optionnelle pour le texte.
+  bool center = false,     // Indicateur optionnel pour centrer le texte.
+  TextStyle? style,        // Style de texte personnalisé optionnel.
+  String extra = '',       // Texte supplémentaire optionnel à ajouter.
+  int? maxLines,           // Nombre maximal de lignes optionnel pour le texte.
+  bool translate = true,   // Indicateur optionnel pour activer/désactiver la traduction.
+  bool bold = false,       // Indicateur optionnel pour rendre le texte en gras.
 }) {
   return Text(
-    // Translate the text if the translate flag is true, and append the extra text.
+    // Traduire le texte si le drapeau translate est vrai, et ajouter le texte supplémentaire.
     (translate ? txt(text) : text) + extra,
-    // Use the provided style or create a new style with the given color, size, and bold option.
+    // Utiliser le style fourni ou créer un nouveau style avec la couleur, la taille et l'option de gras spécifiées.
     style: style ??
         NavigationService.navigatorKey.currentContext!.text.copyWith(
             color: color,
             fontSize: size,
             fontWeight: bold ? FontWeight.bold : null),
-    // Set the maximum number of lines and the overflow behavior if maxLines is specified.
+    // Définir le nombre maximal de lignes et le comportement de débordement si maxLines est spécifié.
     maxLines: maxLines,
     overflow: maxLines != null ? TextOverflow.ellipsis : null,
-    // Center the text if the center flag is true.
+    // Centrer le texte si le drapeau center est vrai.
     textAlign: center ? TextAlign.center : null,
   );
 }

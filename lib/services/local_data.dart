@@ -5,32 +5,24 @@ import 'package:weather_app/models/language.dart';
 import 'package:weather_app/models/theme.dart';
 import 'package:weather_app/models/unit_model.dart';
 import 'package:weather_app/models/weather%20model/weather_model.dart';
-/// A class that handles local data storage using Hive.
+
+/// Une classe qui gère le stockage local des données en utilisant Hive.
 ///
-/// Uses Hive for local database operations and stores various weather,
-/// unit settings, theme, and language preferences.
+/// Utilise Hive pour les opérations de base de données locale et stocke diverses 
+/// données météorologiques, paramètres d'unité, thème et préférences linguistiques.
 ///
-/// Dependencies:
-/// - hive: ^2.0.4
-/// - path_provider: ^2.0.5
-/// - weather_app/constants/const_data.dart
-/// - weather_app/models/language.dart
-/// - weather_app/models/theme.dart
-/// - weather_app/models/unit_model.dart
-/// - weather_app/models/weather_model/weather_model.dart
-///
-/// Example usage:
+/// Exemple d'utilisation:
 /// ```dart
 /// await LocalData.init();
 /// LocalData.saveWeatherData(weatherModel);
 /// WeatherModel? mainWeather = LocalData.getMainWeather();
 /// ```
 ///
-/// Note: Ensure to call `LocalData.init()` before using other methods.
+/// Remarque: Assurez-vous d'appeler `LocalData.init()` avant d'utiliser d'autres méthodes.
 class LocalData {
   static late final Box _box;
 
-  /// Initializes Hive and opens the 'myData' box for storing data.
+  /// Initialise Hive et ouvre la boîte 'myData' pour stocker les données.
   static Future<void> init() async {
     final directory = await getApplicationDocumentsDirectory();
     Hive.init(directory.path);
@@ -38,13 +30,13 @@ class LocalData {
     _box = Hive.box('myData');
   }
 
-  /// Retrieves a list of saved weather data from local storage.
+  /// Récupère une liste des données météorologiques sauvegardées à partir du stockage local.
   static List<WeatherModel> getSavedWeather() {
     return List<WeatherModel>.from(_box.get('cities', defaultValue: []).map(
         (data) => WeatherModel.fromJson(Map<String, dynamic>.from(data))));
   }
 
-  /// Retrieves the main weather data stored in local storage.
+  /// Récupère les données météorologiques principales stockées dans le stockage local.
   static WeatherModel? getMainWeather() {
     final mainCity = _box.get('mainCity');
     if (mainCity != null) {
@@ -53,7 +45,7 @@ class LocalData {
     return null;
   }
 
-  /// Saves weather data to local storage. Optionally marks it as main city.
+  /// Sauvegarde les données météorologiques dans le stockage local. Optionnellement, les marque comme ville principale.
   static saveWeatherData(WeatherModel data, {bool isMain = false}) {
     if (isMain) {
       _box.put('mainCity', data.toJson());
@@ -65,24 +57,24 @@ class LocalData {
     }
   }
 
-  /// Saves all weather data to local storage.
+  /// Sauvegarde toutes les données météorologiques dans le stockage local.
   static saveAllWeatherData(List<WeatherModel> cities) {
     _box.put('cities', cities.map((e) => e.toJson()).toList());
   }
 
-  /// Removes weather data from local storage.
+  /// Supprime les données météorologiques du stockage local.
   static removeWeatherData(WeatherModel data) {
     List<dynamic> cities = _box.get('cities', defaultValue: []);
     cities.removeWhere((c) => c['city']['id'] == data.city.id);
     _box.put('cities', cities);
   }
 
-  /// Saves unit settings parameters to local storage.
+  /// Sauvegarde les paramètres des unités dans le stockage local.
   static saveWeatherParams({required String key, required UnitModel unit}) {
     _box.put(key, unit.toMap());
   }
 
-  /// Retrieves unit settings parameters from local storage.
+  /// Récupère les paramètres des unités à partir du stockage local.
   static getWeatherParams({required String key}) {
     switch (key) {
       case 'temp':
@@ -98,25 +90,26 @@ class LocalData {
     }
   }
 
-  /// Saves the selected app theme to local storage.
+  /// Sauvegarde le thème de l'application sélectionné dans le stockage local.
   static saveAppTheme(AppThemeModel value) {
     _box.put('appTheme', value.name);
   }
 
-  /// Retrieves the currently selected app theme from local storage.
+  /// Récupère le thème de l'application actuellement sélectionné à partir du stockage local.
   static AppThemeModel getAppTheme() {
     return getAppThemeFromString(
         _box.get('appTheme', defaultValue: AppThemeModel.system.name));
   }
 
-  /// Saves the selected app language to local storage.
+  /// Sauvegarde la langue de l'application sélectionnée dans le stockage local.
   static saveAppLanguage(LanguageModel language) {
     _box.put('appLanguage', language.name);
   }
 
-  /// Retrieves the currently selected app language from local storage.
+  /// Récupère la langue de l'application actuellement sélectionnée à partir du stockage local.
   static LanguageModel getAppLanguage() {
     return getLanguageFromString(
         _box.get('appLanguage', defaultValue: LanguageModel.french.name));
   }
 }
+
